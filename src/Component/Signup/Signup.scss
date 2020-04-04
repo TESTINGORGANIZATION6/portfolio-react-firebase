@@ -1,5 +1,17 @@
+// .Signup {
+//     background-image: url("../../Images/stadium.jpg");
+//     background-position: center;
+//     background-repeat: no-repeat;
+//     background-size: cover;
+//     height: ;
+//     width: 100px;
+// }
 
 .signup-modal {
+    background-image: url("../../Images/stadium.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     position: fixed;
     z-index: 10000;
     left: 0;
@@ -39,7 +51,6 @@
 
         .signup-image {
             margin: 0 auto;
-            margin-bottom: 10px;
             width: 80px;
             height: 80px;
         }
@@ -86,7 +97,7 @@
                 outline: none;
                 border: 1px solid #2a2aee;
                 border-radius: 5px;
-                padding: 4px;
+                padding: 5px;
                 margin-top: 10px;
                 cursor: pointer;
             }
