@@ -5,7 +5,7 @@ import '../Login/Login.scss'
 import { register } from '../../Services/services'
 
 class Signup extends PureComponent {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {
@@ -15,36 +15,36 @@ class Signup extends PureComponent {
         {
           value: '',
           error: 'First Name field can not be empty',
-          isError: false,
+          isError: false
         },
         {
           value: '',
           error: 'Last Name field can not be empty',
-          isError: false,
+          isError: false
         },
         {
           value: '',
           error: 'Role field can not be empty',
-          isError: false,
+          isError: false
         },
         {
           value: '',
           error: 'Enter valid Email id',
-          isError: false,
+          isError: false
         },
         {
           value: '',
           error: 'Password field can not be empty',
-          isError: false,
-        },
-      ],
+          isError: false
+        }
+      ]
     }
   }
 
   updateState = () => {
     console.log('here on click')
     this.setState({
-      isSignUp: true,
+      isSignUp: true
     })
   }
 
@@ -55,14 +55,14 @@ class Signup extends PureComponent {
   //     });
   // }
 
-  onChange() {
+  onChange () {
     console.log('input change')
   }
 
   redirectToLoginPage = () => {
     this.setState({
       isSignUp: false,
-      isRedirectToLogin: true,
+      isRedirectToLogin: true
     })
   }
 
@@ -89,17 +89,17 @@ class Signup extends PureComponent {
         LastName: updatedInputValues[1].value,
         Email: updatedInputValues[3].value,
         Role: updatedInputValues[2].value,
-        Password: updatedInputValues[4].value,
+        Password: updatedInputValues[4].value
       }
       register(userDetail).then((res) => console.log(res))
     }
 
     this.setState({
-      inputValues: updatedInputValues,
+      inputValues: updatedInputValues
     })
   }
 
-  checkSignup() {
+  checkSignup () {
     const { isSignUp, inputValues } = this.state
     console.log('here in Sign Up')
     return (
@@ -183,7 +183,7 @@ class Signup extends PureComponent {
               style={{
                 backgroundColor: 'orangered',
                 height: '1px',
-                marginBottom: '3px',
+                marginBottom: '3px'
               }}
             ></div>
             <div className="signup-box">
@@ -194,7 +194,7 @@ class Signup extends PureComponent {
                 style={{
                   color: '#2a2aee',
                   fontSize: '18px',
-                  cursor: 'pointer',
+                  cursor: 'pointer'
                 }}
                 onClick={this.redirectToLoginPage}
               >
@@ -210,16 +210,16 @@ class Signup extends PureComponent {
   callBackLogin = () => {
     console.log('callback login .... ')
     this.setState({
-      isRedirectToLogin: false,
+      isRedirectToLogin: false
     })
   }
 
-  checkLogin() {
+  checkLogin () {
     const { isRedirectToLogin } = this.state
     return isRedirectToLogin && <Login callBackLogin={this.callBackLogin} />
   }
 
-  render() {
+  render () {
     return (
       <div className="Signup">
         {/* <button className='header-button' onClick={this.updateState}>Sign Up</button> */}

@@ -1,9 +1,10 @@
 import React, { PureComponent } from 'react'
 import './Login.scss'
 import { login } from '../../Services/services'
+import PropTypes from 'prop-types'
 
 class Login extends PureComponent {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {
@@ -13,18 +14,18 @@ class Login extends PureComponent {
         {
           value: '',
           error: 'Email id should contain @ in it',
-          isError: false,
+          isError: false
         },
         {
           value: '',
           error: 'You have entered wrong password',
-          isError: false,
-        },
-      ],
+          isError: false
+        }
+      ]
     }
   }
 
-  componentDidMount() {
+  componentDidMount () {
     // window.gapi.load('client:auth2', () => {
     //     window.gapi.client.init({
     //         clientId: '191483958587-js6uiijoc757ulf3hul6ab2uq5oqa9b9.apps.googleusercontent.com',
@@ -37,24 +38,24 @@ class Login extends PureComponent {
     // });
   }
 
-//   changeSignedStatus = (isSignedIn) => {
-//     if (isSignedIn) {
-//         this.setState({
-//             userId: this.auth.currentUser.get().getId()
-//         });
-//     } else {
-//         this.props.SIGN_OUT();
-//     }
-//   }
+  //   changeSignedStatus = (isSignedIn) => {
+  //     if (isSignedIn) {
+  //         this.setState({
+  //             userId: this.auth.currentUser.get().getId()
+  //         });
+  //     } else {
+  //         this.props.SIGN_OUT();
+  //     }
+  //   }
 
   updateOnCloseClick = () => {
     this.setState({
-      isLoginHere: false,
+      isLoginHere: false
     })
     if (this.props.callBackLogin && this.props.callBackLogin());
   }
 
-  onChange() {
+  onChange () {
     console.log('input change')
   }
 
@@ -83,17 +84,17 @@ class Login extends PureComponent {
     if (!updatedInputValues.filter((input) => input.isError === true).length) {
       const userDetail = {
         Email: updatedInputValues[0].value,
-        Password: updatedInputValues[1].value,
+        Password: updatedInputValues[1].value
       }
       login(userDetail).then((res) => console.log(res))
     }
 
     this.setState({
-      inputValues: updatedInputValues,
+      inputValues: updatedInputValues
     })
   }
 
-  render() {
+  render () {
     const { isLoginHere, inputValues } = this.state
     return (
       isLoginHere && (
@@ -140,7 +141,7 @@ class Login extends PureComponent {
               style={{
                 backgroundColor: 'orangered',
                 height: '1px',
-                marginBottom: '3px',
+                marginBottom: '3px'
               }}
             ></div>
             <div className="login-box">
@@ -151,7 +152,7 @@ class Login extends PureComponent {
                 style={{
                   color: '#2a2aee',
                   fontSize: '16px',
-                  cursor: 'pointer',
+                  cursor: 'pointer'
                 }}
                 onClick={this.googleAuthRequired}
               >
@@ -163,6 +164,10 @@ class Login extends PureComponent {
       )
     )
   }
+}
+
+Login.propTypes = {
+  callBackLogin: PropTypes.func
 }
 
 export default Login
