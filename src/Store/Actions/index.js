@@ -1,16 +1,20 @@
-export const testAction = () => ({
-  type: 'TEST_ACTION'
+export const testAction = (data) => ({
+  type: 'TEST_ACTION',
+  payload: data
 })
 
-export const SIGN_IN = (userId) => {
+// action for adding userId
+export const getSignupUserId = (userId) => {
   return {
-    type: 'SIGN_IN',
-    userId
+    type: 'GET_USERID',
+    payload: userId
   }
 }
 
-export const SIGN_OUT = () => {
+// action for login userid
+export const getLoginUserId = (loginData) => {
   return {
-    type: 'SIGN_OUT'
+    type: 'LOGIN_USERID',
+    payload: loginData
   }
 }

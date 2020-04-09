@@ -1,13 +1,29 @@
 import axios from 'axios'
 
+export const getUserName = (userName) => {
+  return axios
+    .get(
+      `https://portfolio-api-node.herokuapp.com/api/User/checkusername/${userName}`,
+      {
+        userName: userName
+      }
+    )
+    .then((res) => {
+      return res
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}
+
 export const register = (newUser) => {
   console.log('register -> ', newUser)
   return axios
     .post('https://portfolio-api-node.herokuapp.com/api/User/signup', {
       FirstName: newUser.FirstName,
       LastName: newUser.LastName,
+      UserName: newUser.UserName,
       Email: newUser.Email,
-      Role: newUser.Role,
       Password: newUser.Password
     })
     .then((res) => {

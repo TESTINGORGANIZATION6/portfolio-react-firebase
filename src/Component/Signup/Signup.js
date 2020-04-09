@@ -1,8 +1,13 @@
 import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import { testAction, getSignupUserId } from '../../Store/Actions'
+
 import Login from '../Login/Login'
 import './Signup.scss'
 import '../Login/Login.scss'
-import { register } from '../../Services/services'
+import { register, getUserName } from '../../Services/services'
+import PropTypes from 'prop-types'
 
 class Signup extends PureComponent {
   constructor (props) {
@@ -24,7 +29,7 @@ class Signup extends PureComponent {
         },
         {
           value: '',
-          error: 'Role field can not be empty',
+          error: 'Username already existed',
           isError: false
         },
         {
@@ -87,11 +92,23 @@ class Signup extends PureComponent {
       const userDetail = {
         FirstName: updatedInputValues[0].value,
         LastName: updatedInputValues[1].value,
+        UserName: updatedInputValues[2].value,
         Email: updatedInputValues[3].value,
-        Role: updatedInputValues[2].value,
         Password: updatedInputValues[4].value
       }
-      register(userDetail).then((res) => console.log(res))
+      getUserName(userDetail.Username).then((res) => {
+        if (res.data.success) {
+          // this response should be use in message to show this user is available
+          register(userDetail).then((res) => {
+            console.log('response -> ', res.data.userId)
+            alert('successfullty signup')
+            this.props.getSignupUserId(res.data.userId)
+          })
+        } else {
+          updatedInputValues[2].isError = true
+          console.log('error')
+        }
+      })
     }
 
     this.setState({
@@ -110,7 +127,7 @@ class Signup extends PureComponent {
             <div style={{ fontSize: '22px' }}>Create a New Account</div>
             <div>
               <img
-                src={require('../../Images/signup2.png')}
+                src={require('../../Images/signup.png')}
                 alt="Signup"
                 className="signup-image"
               />
@@ -120,7 +137,7 @@ class Signup extends PureComponent {
                 <i className="fa fa-user icon" aria-hidden="true"></i>
                 <input
                   className="signup-box-inputBox"
-                  placeholder="Enter your First Name"
+                  placeholder="First Name"
                   value={this.value}
                   onChange={(e) => this.onChange(e)}
                 />
@@ -132,7 +149,7 @@ class Signup extends PureComponent {
                 <i className="fa fa-phone icon" aria-hidden="true"></i>
                 <input
                   className="signup-box-inputBox"
-                  placeholder="Enter your Last Name"
+                  placeholder="Last Name"
                   value={this.value}
                   onChange={(e) => this.onChange(e)}
                 />
@@ -144,7 +161,7 @@ class Signup extends PureComponent {
                 <i className="fa fa-envelope icon" aria-hidden="true"></i>
                 <input
                   className="signup-box-inputBox"
-                  placeholder="Enter your Role"
+                  placeholder="Username"
                   value={this.value}
                   onChange={(e) => this.onChange(e)}
                 />
@@ -156,7 +173,7 @@ class Signup extends PureComponent {
                 <i className="fa fa-envelope icon" aria-hidden="true"></i>
                 <input
                   className="signup-box-inputBox"
-                  placeholder="Enter your Email id"
+                  placeholder="Email id"
                   value={this.value}
                   onChange={(e) => this.onChange(e)}
                 />
@@ -169,7 +186,7 @@ class Signup extends PureComponent {
                 <input
                   type="password"
                   className="signup-box-inputBox"
-                  placeholder="Create Password"
+                  placeholder="Password"
                   value={this.value}
                   onChange={(e) => this.onChange(e)}
                 />
@@ -230,4 +247,22 @@ class Signup extends PureComponent {
   }
 }
 
-export default Signup
+Signup.propTypes = {
+  getSignupUserId: PropTypes.func
+}
+
+const mapStateToProps = (state) => {
+  return {
+    userId: state.data.userId,
+    loginData: state.data.loginData
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    testAction: () => dispatch(testAction()),
+    getSignupUserId: (userId) => dispatch(getSignupUserId(userId))
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Signup))

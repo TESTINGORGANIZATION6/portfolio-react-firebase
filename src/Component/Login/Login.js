@@ -1,4 +1,7 @@
 import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import { testAction, getLoginUserId } from '../../Store/Actions'
 import './Login.scss'
 import { login } from '../../Services/services'
 import PropTypes from 'prop-types'
@@ -86,7 +89,10 @@ class Login extends PureComponent {
         Email: updatedInputValues[0].value,
         Password: updatedInputValues[1].value
       }
-      login(userDetail).then((res) => console.log(res))
+      login(userDetail).then((res) => {
+        console.log('login ---> data -> ', res)
+        this.props.getLoginUserId(res.data)
+      })
     }
 
     this.setState({
@@ -167,7 +173,23 @@ class Login extends PureComponent {
 }
 
 Login.propTypes = {
-  callBackLogin: PropTypes.func
+  callBackLogin: PropTypes.func,
+  getLoginUserId: PropTypes.func
 }
 
-export default Login
+const mapStateToProps = (state) => {
+  return {
+    userId: state.data.userId,
+    loginData: state.data.loginData
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    testAction: () => dispatch(testAction()),
+    getLoginUserId: (loginData) => dispatch(getLoginUserId(loginData))
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login))
+// export default Login;
