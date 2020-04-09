@@ -1,0 +1,98 @@
+
+.signup-modal {
+    background-image: url("../../Images/stadium.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    display: block !important;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.6);
+
+    .modal-content {
+        color: orangered;
+        background-color: #fefefe;
+        margin: 10% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 35%;
+        border-radius: 5px;
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            right: 5px;
+            top: 0px;
+        }
+        
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .signup-image {
+            margin: 0 auto;
+            width: 80px;
+            height: 80px;
+        }
+
+        .signup-box {
+            font-size: 14px;
+            margin-bottom: 10px;
+
+            .error-message {
+                margin-bottom: 10px;
+            }
+
+            .signup-box-container {
+                display: -ms-flexbox;
+                display: flex;
+                width: 100%;
+
+                .signup-box-inputBox {
+                    padding: 4px;
+                    width: 100%;
+                    border: 1px solid #2a2aee;
+                    outline: none;
+                }
+
+                .signup-box-inputBox:focus {
+                    border: 2px solid #2a2aee;
+                    border-left: 1px solid #2a2aee;
+                }
+
+                .icon {
+                    font-size: 20px;
+                    padding: 6px;
+                    background: #2a2aee;
+                    color: white;
+                    min-width: 40px;
+                    text-align: center;
+                }
+            }
+
+            .signup-box-button {
+                width: 100%;
+                background-color: #2a2aee;
+                color: white;
+                outline: none;
+                border: 1px solid #2a2aee;
+                border-radius: 5px;
+                padding: 5px;
+                margin-top: 10px;
+                cursor: pointer;
+            }
+        }
+    }
+}
