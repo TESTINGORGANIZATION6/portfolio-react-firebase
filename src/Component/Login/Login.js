@@ -18,12 +18,12 @@ class Login extends PureComponent {
       inputValues: [
         {
           value: '',
-          error: 'Email id should contain @ in it',
+          error: 'Invalid Username!!',
           isError: false
         },
         {
           value: '',
-          error: 'You have entered wrong password',
+          error: 'Incorrect password!!',
           isError: false
         }
       ]
@@ -75,21 +75,22 @@ class Login extends PureComponent {
   onSubmitClick = (event) => {
     const { inputValues } = this.state
     const updatedInputValues = [...inputValues]
-    const email_reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/ // eslint-disable-line
+    // const email_reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/ // eslint-disable-line
 
     event.preventDefault()
 
     updatedInputValues.forEach((inputValue, index) => {
       inputValue.value = event.target[index].value
     })
-    updatedInputValues[0].isError = !email_reg.test(updatedInputValues[0].value)
+    // updatedInputValues[0].isError = !email_reg.test(updatedInputValues[0].value)
+    updatedInputValues[0].isError = !event.target[0].value.length
     updatedInputValues[1].isError = !event.target[1].value.length
 
     console.log('<------->', updatedInputValues)
 
     if (!updatedInputValues.filter((input) => input.isError === true).length) {
       const userDetail = {
-        Email: updatedInputValues[0].value,
+        UserName: updatedInputValues[0].value,
         Password: updatedInputValues[1].value
       }
       this.setState({ isLoader: true })
@@ -136,7 +137,7 @@ class Login extends PureComponent {
                   <i className="fa fa-user icon" aria-hidden="true"></i>
                   <input
                     className="login-box-inputBox"
-                    placeholder="Enter your Email id"
+                    placeholder="Username"
                     value={this.value}
                     onChange={(e) => this.onChange(e)}
                   />
@@ -149,7 +150,7 @@ class Login extends PureComponent {
                   <input
                     type="password"
                     className="login-box-inputBox"
-                    placeholder="Enter your Password"
+                    placeholder="Password"
                     value={this.value}
                     onChange={(e) => this.onChange(e)}
                   />

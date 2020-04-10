@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 function UserFinalForm ({ values, nextStep, prevStep }) {
   const handleContinue = (evt) => {
     evt.preventDefault()
-    nextStep(6)
+    nextStep(1)
   }
 
   const handleBack = (evt) => {
