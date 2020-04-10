@@ -5,12 +5,14 @@ import { testAction, getLoginUserId } from '../../Store/Actions'
 import './Login.scss'
 import { login } from '../../Services/services'
 import PropTypes from 'prop-types'
+import Loader from 'react-loader-spinner'
 
 class Login extends PureComponent {
   constructor (props) {
     super(props)
 
     this.state = {
+      isLoader: false,
       isLoginHere: true,
       userId: null,
       inputValues: [
@@ -76,6 +78,7 @@ class Login extends PureComponent {
     const email_reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/ // eslint-disable-line
 
     event.preventDefault()
+
     updatedInputValues.forEach((inputValue, index) => {
       inputValue.value = event.target[index].value
     })
@@ -89,9 +92,14 @@ class Login extends PureComponent {
         Email: updatedInputValues[0].value,
         Password: updatedInputValues[1].value
       }
+      this.setState({ isLoader: true })
       login(userDetail).then((res) => {
-        console.log('login ---> data -> ', res)
-        this.props.getLoginUserId(res.data)
+        // console.log('login ---> data -> ', res)
+        this.setState({ isLoader: false })
+        this.props.getLoginUserId(res)
+        if (res.userId) {
+          this.props.history.push('/player-register')
+        }
       })
     }
 
@@ -101,72 +109,81 @@ class Login extends PureComponent {
   }
 
   render () {
-    const { isLoginHere, inputValues } = this.state
+    const { isLoginHere, inputValues, isLoader } = this.state
     return (
       isLoginHere && (
-        <div id="myModal" className="login-modal">
-          <div className="modal-content">
-            {/* <span className="close" onClick={this.updateOnCloseClick}>&times;</span> */}
-            <div style={{ fontSize: '22px' }}>Log In</div>
-            <div>
-              <img
-                src={require('../../Images/login.png')}
-                alt="Login"
-                className="login-image"
-              />
+        <>
+          {isLoader ? (
+            <div className="loader-resto">
+              <div className="loader">
+                <Loader type="Bars" color="#00BFFF" height={40} width={40} />
+              </div>
             </div>
-            <form className="login-box" onSubmit={this.onSubmitClick}>
-              <div className="login-box-container">
-                <i className="fa fa-user icon" aria-hidden="true"></i>
-                <input
-                  className="login-box-inputBox"
-                  placeholder="Enter your Email id"
-                  value={this.value}
-                  onChange={(e) => this.onChange(e)}
+          ) : null}
+          <div id="myModal" className="login-modal">
+            <div className="modal-content">
+              {/* <span className="close" onClick={this.updateOnCloseClick}>&times;</span> */}
+              <div style={{ fontSize: '22px' }}>Log In</div>
+              <div>
+                <img
+                  src={require('../../Images/login.png')}
+                  alt="Login"
+                  className="login-image"
                 />
               </div>
-              <div className="error-message">
-                {inputValues[0].isError && inputValues[0].error}
-              </div>
-              <div className="login-box-container">
-                <i className="fa fa-lock icon" aria-hidden="true"></i>
-                <input
-                  type="password"
-                  className="login-box-inputBox"
-                  placeholder="Enter your Password"
-                  value={this.value}
-                  onChange={(e) => this.onChange(e)}
-                />
-              </div>
-              <div className="error-message">
-                {inputValues[1].isError && inputValues[1].error}
-              </div>
-              <button className="login-box-button">Log In</button>
-            </form>
-            <div
-              style={{
-                backgroundColor: 'orangered',
-                height: '1px',
-                marginBottom: '3px'
-              }}
-            ></div>
-            <div className="login-box">
-              <span style={{ margin: '10px 0px', fontSize: '16px' }}>
-                Log In with Google ?{' '}
-              </span>
-              <span
+              <form className="login-box" onSubmit={this.onSubmitClick}>
+                <div className="login-box-container">
+                  <i className="fa fa-user icon" aria-hidden="true"></i>
+                  <input
+                    className="login-box-inputBox"
+                    placeholder="Enter your Email id"
+                    value={this.value}
+                    onChange={(e) => this.onChange(e)}
+                  />
+                </div>
+                <div className="error-message">
+                  {inputValues[0].isError && inputValues[0].error}
+                </div>
+                <div className="login-box-container">
+                  <i className="fa fa-lock icon" aria-hidden="true"></i>
+                  <input
+                    type="password"
+                    className="login-box-inputBox"
+                    placeholder="Enter your Password"
+                    value={this.value}
+                    onChange={(e) => this.onChange(e)}
+                  />
+                </div>
+                <div className="error-message">
+                  {inputValues[1].isError && inputValues[1].error}
+                </div>
+                <button className="login-box-button">Log In</button>
+              </form>
+              <div
                 style={{
-                  color: '#2a2aee',
-                  fontSize: '16px',
-                  cursor: 'pointer'
+                  backgroundColor: 'orangered',
+                  height: '1px',
+                  marginBottom: '3px'
                 }}
-                onClick={this.googleAuthRequired}
-              >
-                Click here
-              </span>
+              ></div>
+              <div className="login-box">
+                <span style={{ margin: '10px 0px', fontSize: '16px' }}>
+                  Log In with Google ?{' '}
+                </span>
+                <span
+                  style={{
+                    color: '#2a2aee',
+                    fontSize: '16px',
+                    cursor: 'pointer'
+                  }}
+                  onClick={this.googleAuthRequired}
+                >
+                  Click here
+                </span>
+              </div>
             </div>
           </div>
-        </div>
+        </>
       )
     )
   }
@@ -174,7 +191,9 @@ class Login extends PureComponent {
 
 Login.propTypes = {
   callBackLogin: PropTypes.func,
-  getLoginUserId: PropTypes.func
+  getLoginUserId: PropTypes.func,
+  history: PropTypes.object,
+  push: PropTypes.func
 }
 
 const mapStateToProps = (state) => {
