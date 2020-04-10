@@ -37,7 +37,7 @@ export const register = (newUser) => {
 export const login = (user) => {
   return axios
     .post('https://portfolio-api-node.herokuapp.com/api/User/login', {
-      Email: user.Email,
+      UserName: user.UserName,
       Password: user.Password
     })
     .then((res) => {
