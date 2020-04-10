@@ -14,7 +14,7 @@ const App = () => {
         <Route path="/signup" component={Signup} />
         <Route path="/login" component={Login} />
         <Route path="/player-register" component={RegistrationSteps} />
-        <Route path='*' component={PageNotFound} />
+        <Route path="*" component={PageNotFound} />
       </BrowserRouter>
     </div>
   )
