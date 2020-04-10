@@ -100,9 +100,14 @@ class Signup extends PureComponent {
         if (res.data.success) {
           // this response should be use in message to show this user is available
           register(userDetail).then((res) => {
-            console.log('response -> ', res.data.userId)
+            // console.log('response -> ', res)
             alert('successfullty signup')
             this.props.getSignupUserId(res.data.userId)
+            // console.log(res)
+            if (res.data.userId) {
+              console.log(this.props)
+              this.props.history.push('/login')
+            }
           })
         } else {
           updatedInputValues[2].isError = true
@@ -248,7 +253,9 @@ class Signup extends PureComponent {
 }
 
 Signup.propTypes = {
-  getSignupUserId: PropTypes.func
+  getSignupUserId: PropTypes.func,
+  history: PropTypes.object,
+  push: PropTypes.func
 }
 
 const mapStateToProps = (state) => {

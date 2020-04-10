@@ -3,16 +3,16 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import Signup from '../Component/Signup/Signup'
 import Login from '../Component/Login/Login'
 import Home from '../Component/Home/Home'
+import RegistrationSteps from '../Component/UserRegistrationForm/JS/RegistrationSteps'
 
 const App = () => {
   return (
     <div>
       <BrowserRouter>
-        <div className="wrapper">
-          <Route path="/" exact component={Home} />
-          <Route path="/signup" component={Signup} />
-          <Route path="/login" component={Login} />
-        </div>
+        <Route path="/" exact component={Home} />
+        <Route path="/signup" component={Signup} />
+        <Route path="/login" component={Login} />
+        <Route path="/player-register" component={RegistrationSteps} />
       </BrowserRouter>
     </div>
   )
