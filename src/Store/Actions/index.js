@@ -19,3 +19,12 @@ export const getLoginUserId = (loginData) => {
     payload: loginData
   }
 }
+
+// action for userDetails
+export const getLoginDetailInfo = (userDetails) => {
+  // debugger
+  return {
+    type: 'GET_USERDETAILS',
+    payload: userDetails
+  }
+}

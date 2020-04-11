@@ -6,7 +6,7 @@ import { testAction, getSignupUserId } from '../../Store/Actions'
 import Login from '../Login/Login'
 import './Signup.scss'
 import '../Login/Login.scss'
-import { register, getUserName } from '../../Services/services'
+import { register, checkUserName } from '../../Services/services'
 import PropTypes from 'prop-types'
 
 class Signup extends PureComponent {
@@ -16,6 +16,8 @@ class Signup extends PureComponent {
     this.state = {
       isSignUp: true,
       isRedirectToLogin: false,
+      isUserFieldCheck: false,
+      isUserNameValid: false,
       inputValues: [
         {
           value: '',
@@ -64,6 +66,23 @@ class Signup extends PureComponent {
     console.log('input change')
   }
 
+  onBlur (event) {
+    event.preventDefault()
+    checkUserName(event.target.value).then((res) => {
+      if (res.data.success) {
+        this.setState({
+          isUserFieldCheck: true,
+          isUserNameValid: true
+        })
+      } else {
+        this.setState({
+          isUserFieldCheck: true,
+          isUserNameValid: false
+        })
+      }
+    })
+  }
+
   redirectToLoginPage = () => {
     this.setState({
       isSignUp: false,
@@ -96,24 +115,24 @@ class Signup extends PureComponent {
         Email: updatedInputValues[3].value,
         Password: updatedInputValues[4].value
       }
-      getUserName(userDetail.Username).then((res) => {
-        if (res.data.success) {
-          // this response should be use in message to show this user is available
-          register(userDetail).then((res) => {
-            // console.log('response -> ', res)
-            alert('successfullty signup')
-            this.props.getSignupUserId(res.data.userId)
-            // console.log(res)
-            if (res.data.userId) {
-              console.log(this.props)
-              this.props.history.push('/login')
-            }
-          })
-        } else {
-          updatedInputValues[2].isError = true
-          console.log('error')
+      // checkUserName(userDetail.Username).then((res) => {
+      //   if (res.data.success) {
+      // this response should be use in message to show this user is available
+      register(userDetail).then((res) => {
+        // console.log('response -> ', res)
+        alert('successfullty signup')
+        this.props.getSignupUserId(res.data.userId)
+        // console.log(res)
+        if (res.data.userId) {
+          console.log(this.props)
+          this.props.history.push('/login')
         }
       })
+      //   } else {
+      //     updatedInputValues[2].isError = true
+      //     console.log('error')
+      //   }
+      // })
     }
 
     this.setState({
@@ -122,7 +141,7 @@ class Signup extends PureComponent {
   }
 
   checkSignup () {
-    const { isSignUp, inputValues } = this.state
+    const { isSignUp, inputValues, isUserFieldCheck, isUserNameValid } = this.state
     console.log('here in Sign Up')
     return (
       isSignUp && (
@@ -169,7 +188,9 @@ class Signup extends PureComponent {
                   placeholder="Username"
                   value={this.value}
                   onChange={(e) => this.onChange(e)}
+                  onBlur={(e) => this.onBlur(e)}
                 />
+                <span>{ isUserFieldCheck && <i className={isUserNameValid ? 'fa fa-check green check-icon' : 'fa fa-times red check-icon'} aria-hidden="true"></i>}</span>
               </div>
               <div className="error-message">
                 {inputValues[2].isError && inputValues[2].error}
@@ -199,7 +220,7 @@ class Signup extends PureComponent {
               <div className="error-message">
                 {inputValues[4].isError && inputValues[4].error}
               </div>
-              <button className="signup-box-button">Sign Up</button>
+              <button className="signup-box-button" disabled={!isUserNameValid}>Sign Up</button>
             </form>
             <div
               style={{

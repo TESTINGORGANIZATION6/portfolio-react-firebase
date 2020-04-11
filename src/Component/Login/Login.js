@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { testAction, getLoginUserId } from '../../Store/Actions'
+import { testAction, getLoginUserId, getLoginDetailInfo } from '../../Store/Actions'
 import './Login.scss'
-import { login } from '../../Services/services'
+import { login, getUserDetails } from '../../Services/services'
 import PropTypes from 'prop-types'
 import Loader from 'react-loader-spinner'
 
@@ -95,12 +95,17 @@ class Login extends PureComponent {
       }
       this.setState({ isLoader: true })
       login(userDetail).then((res) => {
-        // console.log('login ---> data -> ', res)
-        this.setState({ isLoader: false })
-        this.props.getLoginUserId(res)
+        console.log('login ---> data -> ', res)
         if (res.userId) {
-          this.props.history.push('/player-register')
+          this.props.getLoginUserId(res)
         }
+        getUserDetails(res).then((res) => {
+          console.log('getUserDetails', res)
+          this.props.getLoginDetailInfo(res.data)
+          this.setState({ isLoader: false }, () => {
+            this.props.history.push('/player-register')
+          })
+        })
       })
     }
 
@@ -193,6 +198,7 @@ class Login extends PureComponent {
 Login.propTypes = {
   callBackLogin: PropTypes.func,
   getLoginUserId: PropTypes.func,
+  getLoginDetailInfo: PropTypes.func,
   history: PropTypes.object,
   push: PropTypes.func
 }
@@ -207,7 +213,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     testAction: () => dispatch(testAction()),
-    getLoginUserId: (loginData) => dispatch(getLoginUserId(loginData))
+    getLoginUserId: (loginData) => dispatch(getLoginUserId(loginData)),
+    getLoginDetailInfo: (userDetails) => dispatch(getLoginDetailInfo(userDetails))
   }
 }
 

@@ -1,6 +1,7 @@
 const storeData = {
   userId: '',
-  loginData: {}
+  loginData: {},
+  userDetails: {}
 }
 
 export const dataReducer = (data = storeData, action) => {
@@ -12,6 +13,11 @@ export const dataReducer = (data = storeData, action) => {
 
   if (action.type === 'LOGIN_USERID') {
     return { ...data, loginData: action.payload }
+  }
+
+  if (action.type === 'GET_USERDETAILS') {
+    console.log('GET_USERDETAILS', action.payload)
+    return { ...data, userDetails: action.payload }
   }
 
   return data

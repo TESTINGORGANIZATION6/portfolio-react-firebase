@@ -1,12 +1,28 @@
 import axios from 'axios'
 
-export const getUserName = (userName) => {
+export const checkUserName = (userName) => {
   return axios
     .get(
-      `https://portfolio-api-node.herokuapp.com/api/User/checkusername?userName=${userName}`,
-      {
-        userName: userName
-      }
+      `https://portfolio-api-node.herokuapp.com/api/User/checkusername?userName=${userName}`
+    )
+    .then((res) => {
+      return res
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}
+
+export const getUserDetails = (user) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${user.token}`
+    }
+  }
+  return axios
+    .get(
+      `https://portfolio-api-node.herokuapp.com/api/User?userId=${user.userId}`,
+      config
     )
     .then((res) => {
       return res
