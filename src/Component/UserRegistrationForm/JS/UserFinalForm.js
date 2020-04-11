@@ -4,10 +4,12 @@ import Slider from 'react-rangeslider'
 import moment from 'moment'
 import PropTypes from 'prop-types'
 
-function UserFinalForm ({ values, nextStep, prevStep }) {
+function UserFinalForm ({ values, userLog, nextStep, prevStep }) {
   const handleContinue = (evt) => {
     evt.preventDefault()
-    nextStep(1)
+    console.log(userLog)
+    sessionStorage.removeItem('userData')
+    userLog.history.push('/login')
   }
 
   const handleBack = (evt) => {
@@ -326,10 +328,10 @@ function UserFinalForm ({ values, nextStep, prevStep }) {
             </div>
           </div>
           <Button className="NEXT-btn" onClick={handleBack}>
-            Back
+            EDIT
           </Button>
           <Button className="NEXT-btn" onClick={handleContinue}>
-            Save And Continue
+            CONFIRM
           </Button>
         </div>
       </div>
@@ -338,6 +340,7 @@ function UserFinalForm ({ values, nextStep, prevStep }) {
 }
 
 UserFinalForm.propTypes = {
+  userLog: PropTypes.any,
   values: PropTypes.object,
   nextStep: PropTypes.func,
   prevStep: PropTypes.func
