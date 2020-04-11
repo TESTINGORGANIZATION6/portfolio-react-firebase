@@ -22,7 +22,7 @@
         margin: 10% auto;
         padding: 20px;
         border: 1px solid #888;
-        width: 300px;
+        width: 350px;
         border-radius: 5px;
 
         .close {
@@ -60,6 +60,7 @@
                 display: -ms-flexbox;
                 display: flex;
                 width: 100%;
+                position: relative;
 
                 .signup-box-inputBox {
                     padding: 4px;
@@ -81,6 +82,25 @@
                     min-width: 40px;
                     text-align: center;
                 }
+
+                .check-icon {
+                    position: absolute;
+                    right: 5px;
+                    font-size: 18px;
+                    margin: 7px 2px;
+                    background: white;
+                    min-width: 10px;
+                    text-align: center;
+                    vertical-align: middle;
+                }
+
+                .green {
+                    color: green;
+                }
+
+                .red {
+                    color: red;
+                }
             }
 
             .signup-box-button {
@@ -93,6 +113,13 @@
                 padding: 5px;
                 margin-top: 10px;
                 cursor: pointer;
+            }
+
+            .signup-box-button:disabled,
+            .signup-box-button[disabled]{
+                border: 1px solid #9898ff;
+                background-color: #9898ff;
+                cursor: default;
             }
         }
     }
