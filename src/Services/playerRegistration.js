@@ -8,7 +8,7 @@ export const getUserDetails = (userLog) => {
   }
   return axios
     .get(
-      `https://portfolio-api-node.herokuapp.com/api/Player/${userLog.userId}`,
+      `https://portfolio-api-node.herokuapp.com/api/Player?playerId=${userLog.userId}`,
       config
     )
     .then((res) => {

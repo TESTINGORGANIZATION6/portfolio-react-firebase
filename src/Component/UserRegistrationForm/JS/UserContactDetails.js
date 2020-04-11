@@ -6,7 +6,6 @@ import { userRegister, userUpdate } from '../../../Services/playerRegistration'
 
 function UserContactDetails ({
   values,
-  userLog,
   handleChange,
   handleChangeMobile,
   nextStep,
@@ -23,13 +22,14 @@ function UserContactDetails ({
 
     if (error.count <= 0) {
       const userDetails = values.userResponse
-      const userLogs = userLog.loginData
+      let userLog = sessionStorage.getItem('userData')
+      userLog = JSON.parse(userLog)
       if (values.isUserRegisterd) {
-        userUpdate(userDetails, userLogs).then((res) => {
+        userUpdate(userDetails, userLog).then((res) => {
           console.log(res)
         })
       } else {
-        userRegister(userDetails, userLogs).then((res) => {
+        userRegister(userDetails, userLog).then((res) => {
           console.log(res)
         })
       }
@@ -157,7 +157,6 @@ function UserContactDetails ({
 }
 
 UserContactDetails.propTypes = {
-  userLog: PropTypes.any,
   values: PropTypes.object,
   handleChangeMobile: PropTypes.func,
   handleChange: PropTypes.func,

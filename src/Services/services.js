@@ -3,7 +3,7 @@ import axios from 'axios'
 export const getUserName = (userName) => {
   return axios
     .get(
-      `https://portfolio-api-node.herokuapp.com/api/User/checkusername/${userName}`,
+      `https://portfolio-api-node.herokuapp.com/api/User/checkusername?userName=${userName}`,
       {
         userName: userName
       }
@@ -41,7 +41,7 @@ export const login = (user) => {
       Password: user.Password
     })
     .then((res) => {
-      localStorage.setItem('usertoken', res.data)
+      sessionStorage.setItem('userData', JSON.stringify(res.data))
       return res.data
     })
     .catch((err) => {

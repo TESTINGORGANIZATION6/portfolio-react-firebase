@@ -18,6 +18,7 @@ class RegistrationSteps extends PureComponent {
   constructor (props) {
     super(props)
     this.state = {
+      appended: false,
       currentStep: 1,
       isLoading: true,
       isUserRegisterd: false,
@@ -111,22 +112,10 @@ class RegistrationSteps extends PureComponent {
   }
 
   componentDidMount () {
-    window.onbeforeunload = function (evt) {
-      var message = 'Are you sure you want to leave?'
-      if (typeof evt === 'undefined') {
-        evt = window.event
-        console.log('hello')
-      }
-      if (evt) {
-        console.log('hello')
-        evt.returnValue = message
-      }
-      return message
-    }
-    const userLog = this.props.loginData
-    // debugger
+    let userLog = sessionStorage.getItem('userData')
+    userLog = JSON.parse(userLog)
+
     getUserDetails(userLog).then((res) => {
-      // debugger;
       if (res) {
         res.DateOfBirth = new Date(res.DateOfBirth)
         for (let i = 0; i < res.Clubs.length; i++) {
@@ -141,7 +130,6 @@ class RegistrationSteps extends PureComponent {
           userResponse: res,
           isUserRegisterd: true
         })
-        console.log(res)
       }
     })
 
@@ -424,7 +412,6 @@ class RegistrationSteps extends PureComponent {
             handleChange={this.handleChange}
             handleChangeMobile={this.handleChangeMobile}
             values={values}
-            userLog={this.props}
           />
         )
         break
@@ -434,6 +421,7 @@ class RegistrationSteps extends PureComponent {
             nextStep={this.nextStep}
             prevStep={this.prevStep}
             values={values}
+            userLog={this.props}
           />
         )
     }
