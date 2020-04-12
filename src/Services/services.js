@@ -13,25 +13,6 @@ export const checkUserName = (userName) => {
     })
 }
 
-export const getUserDetails = (user) => {
-  const config = {
-    headers: {
-      Authorization: `Bearer ${user.token}`
-    }
-  }
-  return axios
-    .get(
-      `https://portfolio-api-node.herokuapp.com/api/User?userId=${user.userId}`,
-      config
-    )
-    .then((res) => {
-      return res
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-}
-
 export const register = (newUser) => {
   console.log('register -> ', newUser)
   return axios

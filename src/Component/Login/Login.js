@@ -1,9 +1,11 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import toastr from 'toastr'
+import 'toastr/build/toastr.min.css'
 import { testAction, getLoginUserId, getLoginDetailInfo } from '../../Store/Actions'
 import './Login.scss'
-import { login, getUserDetails } from '../../Services/services'
+import { login } from '../../Services/services'
 import PropTypes from 'prop-types'
 import Loader from 'react-loader-spinner'
 
@@ -13,7 +15,7 @@ class Login extends PureComponent {
 
     this.state = {
       isLoader: false,
-      isLoginHere: true,
+      // isLoginHere: true,
       userId: null,
       inputValues: [
         {
@@ -53,12 +55,12 @@ class Login extends PureComponent {
   //     }
   //   }
 
-  updateOnCloseClick = () => {
-    this.setState({
-      isLoginHere: false
-    })
-    if (this.props.callBackLogin && this.props.callBackLogin());
-  }
+  // updateOnCloseClick = () => {
+  //   this.setState({
+  //     isLoginHere: false
+  //   })
+  //   if (this.props.callBackLogin && this.props.callBackLogin());
+  // }
 
   onChange () {
     console.log('input change')
@@ -96,16 +98,18 @@ class Login extends PureComponent {
       this.setState({ isLoader: true })
       login(userDetail).then((res) => {
         console.log('login ---> data -> ', res)
-        if (res.userId) {
-          this.props.getLoginUserId(res)
-        }
-        getUserDetails(res).then((res) => {
-          console.log('getUserDetails', res)
-          this.props.getLoginDetailInfo(res.data)
+        if (res.success) {
+          this.props.getLoginDetailInfo(res)
+          toastr.success('Login done successfully')
           this.setState({ isLoader: false }, () => {
-            this.props.history.push('/player-register')
+            this.props.history.push('/dashBoard')
           })
-        })
+        } else {
+          toastr.success('incorrect login id and password')
+          this.setState({ isLoader: false }, () => {
+            this.props.history.push('/login')
+          })
+        }
       })
     }
 
@@ -115,82 +119,81 @@ class Login extends PureComponent {
   }
 
   render () {
-    const { isLoginHere, inputValues, isLoader } = this.state
+    const { inputValues, isLoader } = this.state
+    toastr.options = { positionClass: 'toast-top-center' }
     return (
-      isLoginHere && (
-        <>
-          {isLoader ? (
-            <div className="loader-resto">
-              <div className="loader">
-                <Loader type="Bars" color="#00BFFF" height={40} width={40} />
-              </div>
-            </div>
-          ) : null}
-          <div id="myModal" className="login-modal">
-            <div className="modal-content">
-              {/* <span className="close" onClick={this.updateOnCloseClick}>&times;</span> */}
-              <div style={{ fontSize: '22px' }}>Log In</div>
-              <div>
-                <img
-                  src={require('../../Images/login.png')}
-                  alt="Login"
-                  className="login-image"
-                />
-              </div>
-              <form className="login-box" onSubmit={this.onSubmitClick}>
-                <div className="login-box-container">
-                  <i className="fa fa-user icon" aria-hidden="true"></i>
-                  <input
-                    className="login-box-inputBox"
-                    placeholder="Username"
-                    value={this.value}
-                    onChange={(e) => this.onChange(e)}
-                  />
-                </div>
-                <div className="error-message">
-                  {inputValues[0].isError && inputValues[0].error}
-                </div>
-                <div className="login-box-container">
-                  <i className="fa fa-lock icon" aria-hidden="true"></i>
-                  <input
-                    type="password"
-                    className="login-box-inputBox"
-                    placeholder="Password"
-                    value={this.value}
-                    onChange={(e) => this.onChange(e)}
-                  />
-                </div>
-                <div className="error-message">
-                  {inputValues[1].isError && inputValues[1].error}
-                </div>
-                <button className="login-box-button">Log In</button>
-              </form>
-              <div
-                style={{
-                  backgroundColor: 'orangered',
-                  height: '1px',
-                  marginBottom: '3px'
-                }}
-              ></div>
-              <div className="login-box">
-                <span style={{ margin: '10px 0px', fontSize: '16px' }}>
-                  Log In with Google ?{' '}
-                </span>
-                <span
-                  style={{
-                    color: '#2a2aee',
-                    fontSize: '16px',
-                    cursor: 'pointer'
-                  }}
-                  onClick={this.googleAuthRequired}
-                >
-                  Click here
-                </span>
-              </div>
+      <>
+        {isLoader ? (
+          <div className="loader-resto">
+            <div className="loader">
+              <Loader type="Bars" color="#00BFFF" height={40} width={40} />
             </div>
           </div>
-        </>
-      )
+        ) : null}
+        <div id="myModal" className="login-modal">
+          <div className="modal-content">
+            {/* <span className="close" onClick={this.updateOnCloseClick}>&times;</span> */}
+            <div style={{ fontSize: '22px' }}>Log In</div>
+            <div>
+              <img
+                src={require('../../Images/login.png')}
+                alt="Login"
+                className="login-image"
+              />
+            </div>
+            <form className="login-box" onSubmit={this.onSubmitClick}>
+              <div className="login-box-container">
+                <i className="fa fa-user icon" aria-hidden="true"></i>
+                <input
+                  className="login-box-inputBox"
+                  placeholder="Username"
+                  value={this.value}
+                  onChange={(e) => this.onChange(e)}
+                />
+              </div>
+              <div className="error-message">
+                {inputValues[0].isError && inputValues[0].error}
+              </div>
+              <div className="login-box-container">
+                <i className="fa fa-lock icon" aria-hidden="true"></i>
+                <input
+                  type="password"
+                  className="login-box-inputBox"
+                  placeholder="Password"
+                  value={this.value}
+                  onChange={(e) => this.onChange(e)}
+                />
+              </div>
+              <div className="error-message">
+                {inputValues[1].isError && inputValues[1].error}
+              </div>
+              <button className="login-box-button">Log In</button>
+            </form>
+            <div
+              style={{
+                backgroundColor: 'orangered',
+                height: '1px',
+                marginBottom: '3px'
+              }}
+            ></div>
+            <div className="login-box">
+              <span style={{ margin: '10px 0px', fontSize: '16px' }}>
+                  Log In with Google ?{' '}
+              </span>
+              <span
+                style={{
+                  color: '#2a2aee',
+                  fontSize: '16px',
+                  cursor: 'pointer'
+                }}
+                onClick={this.googleAuthRequired}
+              >
+                  Click here
+              </span>
+            </div>
+          </div>
+        </div>
+      </>
     )
   }
 }
@@ -203,12 +206,12 @@ Login.propTypes = {
   push: PropTypes.func
 }
 
-const mapStateToProps = (state) => {
-  return {
-    userId: state.data.userId,
-    loginData: state.data.loginData
-  }
-}
+// const mapStateToProps = (state) => {
+//   return {
+//     userId: state.data.userId,
+//     loginData: state.data.loginData
+//   }
+// }
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -218,5 +221,5 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login))
+export default withRouter(connect(null, mapDispatchToProps)(Login))
 // export default Login;

@@ -1,7 +1,7 @@
 const storeData = {
   userId: '',
   loginData: {},
-  userDetails: {}
+  userDetails: null
 }
 
 export const dataReducer = (data = storeData, action) => {

@@ -1,18 +1,19 @@
 .Header-wrapper {
     color: white;
     width: 100%;
+    height: 80px;
     position: fixed;
-    background-color: #00000087;
+    display: flex;
+    top: 0;
+    // background-color: #00000087;
+    background:#0346bcbd;
     font-size: 20px;
-    padding: 20px;
+    padding: 10px;
     z-index: 9999;
 
     .authentication {
-        display: inline;
-        text-align: center;
-        // position: absolute;
-        // top: 5px;
-        // right: 50px;
+        position: relative;
+        top: 10px;
 
         .header-button {
             background-color: #00000000;
@@ -26,5 +27,29 @@
             color: orangered;
             transform: translateY(1px);
         }
+    }
+
+    .userProfile{
+        font-size: 38px !important;
+        color: white;
+    }
+
+    .displayName {
+        font-size: 16px;
+    }
+    
+    .UserName{
+        color: white;
+        text-align: center;
+        position: absolute;
+        right: 0;
+        margin-right: 15px;
+    }
+
+    .logo{
+        font-size: 48px;
+        color: white;
+        position: absolute;
+        top: 0;
     }
 }
