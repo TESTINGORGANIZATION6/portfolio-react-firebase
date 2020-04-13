@@ -35,7 +35,8 @@ export const login = (user) => {
   return axios
     .post('https://portfolio-api-node.herokuapp.com/api/User/login', {
       UserName: user.UserName,
-      Password: user.Password
+      Password: user.Password,
+      sso: user.sso ? user.sso : undefined
     })
     .then((res) => {
       sessionStorage.setItem('userData', JSON.stringify(res.data))

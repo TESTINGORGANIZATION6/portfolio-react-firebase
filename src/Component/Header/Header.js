@@ -1,8 +1,10 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import queryString from 'query-string'
 import PropTypes from 'prop-types'
 import './Header.scss'
+import { login } from '../../Services/services'
 
 class Header extends PureComponent {
   constructor (props) {
@@ -29,15 +31,39 @@ class Header extends PureComponent {
     this.props.history.push('/')
   }
 
+  componentDidMount () {
+    const query = queryString.parse(this.props.location.search)
+    if (query.user) {
+      console.log('Google User')
+      const user = {
+        UserName: query.token,
+        Password: 'NA',
+        sso: query.user
+      }
+      login(user).then(() => {
+        this.setState({
+          isLogin: true
+        })
+      })
+    }
+  }
+
   render () {
     const { userDetails } = this.props
     console.log('render header', this.props)
+    const { isLogin } = this.state
     return (
-      <div className='Header-wrapper'>
-        <div className='authentication'>
-          <button className='header-button' onClick={this.updateHome}>Home</button>
-          <button className='header-button' onClick={this.updateSignup}>Sign Up</button>
-          <button className='header-button' onClick={this.updateLogin}>Log in</button>
+      <div>
+        <div className='Header-wrapper'>
+          {isLogin
+            ? <div className='authentication'>
+              <button className='header-button' onClick={this.updateHome}>Home</button>
+              <button className='header-button' onClick={this.updateLogout}>Log out</button>
+            </div> : <div className='authentication'>
+              <button className='header-button' onClick={this.updateHome}>Home</button>
+              <button className='header-button' onClick={this.updateSignup}>Sign Up</button>
+              <button className='header-button' onClick={this.updateLogin}>Log in</button>
+            </div>}
         </div>
         {/* <div className="logo">
             <i className="fa fa-hand-lizard-o" aria-hidden="true"></i>
@@ -56,7 +82,8 @@ Header.propTypes = {
   push: PropTypes.func,
   userDetails: PropTypes.object,
   FirstName: PropTypes.string,
-  LastName: PropTypes.string
+  LastName: PropTypes.string,
+  location: PropTypes.object
 }
 
 const mapStateToProps = (state) => {
