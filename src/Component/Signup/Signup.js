@@ -47,6 +47,11 @@ class Signup extends PureComponent {
           value: '',
           error: 'Password field can not be empty',
           isError: false
+        },
+        {
+          value: '',
+          error: 'Password does not match with this',
+          isError: false
         }
       ]
     }
@@ -110,6 +115,8 @@ class Signup extends PureComponent {
     // updatedInputValues[1].isError = !number_reg.test(updatedInputValues[1].value);
     updatedInputValues[3].isError = !email_reg.test(updatedInputValues[3].value)
     updatedInputValues[4].isError = !event.target[4].value.length
+
+    updatedInputValues[5].isError = (updatedInputValues[4].value !== updatedInputValues[5].value)
 
     if (!updatedInputValues.filter((input) => input.isError === true).length) {
       const userDetail = {
@@ -231,6 +238,19 @@ class Signup extends PureComponent {
               </div>
               <div className="error-message">
                 {inputValues[4].isError && inputValues[4].error}
+              </div>
+              <div className="signup-box-container">
+                <i className="fa fa-lock icon" aria-hidden="true"></i>
+                <input
+                  type="password"
+                  className="signup-box-inputBox"
+                  placeholder="Confirm Password"
+                  value={this.value}
+                  onChange={(e) => this.onChange(e)}
+                />
+              </div>
+              <div className="error-message">
+                {inputValues[5].isError && inputValues[5].error}
               </div>
               <button className="signup-box-button" disabled={!isUserNameValid}>Sign Up</button>
             </form>

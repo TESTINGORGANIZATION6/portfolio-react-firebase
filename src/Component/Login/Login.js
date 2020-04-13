@@ -135,7 +135,7 @@ class Login extends PureComponent {
               style={{
                 backgroundColor: 'orangered',
                 height: '1px',
-                marginBottom: '3px'
+                marginBottom: '20px'
               }}
             >
               <div className="login-box">

@@ -25,6 +25,7 @@ class Header extends PureComponent {
 
   updateLogout = () => {
     console.log('On logout button click', this.props)
+    this.props.history.push('/login')
   }
 
   updateHome = () => {
@@ -53,18 +54,18 @@ class Header extends PureComponent {
     console.log('render header', this.props)
     const { isLogin } = this.state
     return (
-      <div>
-        <div className='Header-wrapper'>
-          {isLogin
-            ? <div className='authentication'>
-              <button className='header-button' onClick={this.updateHome}>Home</button>
-              <button className='header-button' onClick={this.updateLogout}>Log out</button>
-            </div> : <div className='authentication'>
-              <button className='header-button' onClick={this.updateHome}>Home</button>
-              <button className='header-button' onClick={this.updateSignup}>Sign Up</button>
-              <button className='header-button' onClick={this.updateLogin}>Log in</button>
-            </div>}
-        </div>
+      <div className='Header-wrapper'>
+        {isLogin
+          ? <div className='authentication'>
+            <button className='header-button' onClick={this.updateHome}>Home</button>
+            <button className='header-button' onClick={this.updateLogout}>Log in</button>
+          </div>
+          : <div className='authentication'>
+            <button className='header-button' onClick={this.updateHome}>Home</button>
+            <button className='header-button' onClick={this.updateSignup}>Sign Up</button>
+            <button className='header-button' onClick={this.updateLogin}>Log in</button>
+          </div>
+        }
         {/* <div className="logo">
             <i className="fa fa-hand-lizard-o" aria-hidden="true"></i>
           </div> */}
