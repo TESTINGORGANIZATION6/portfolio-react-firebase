@@ -32,46 +32,8 @@ class Login extends PureComponent {
     }
   }
 
-  componentDidMount () {
-    // window.gapi.load('client:auth2', () => {
-    //     window.gapi.client.init({
-    //         clientId: '191483958587-js6uiijoc757ulf3hul6ab2uq5oqa9b9.apps.googleusercontent.com',
-    //         scope: 'email'
-    //     }).then(() => {
-    //         this.auth = window.gapi.auth2.getAuthInstance();
-    //         this.changeSignedStatus(this.auth.isSignedIn.get());
-    //         this.auth.isSignedIn.listen(this.changeSignedStatus);
-    //     });
-    // });
-  }
-
-  //   changeSignedStatus = (isSignedIn) => {
-  //     if (isSignedIn) {
-  //         this.setState({
-  //             userId: this.auth.currentUser.get().getId()
-  //         });
-  //     } else {
-  //         this.props.SIGN_OUT();
-  //     }
-  //   }
-
-  // updateOnCloseClick = () => {
-  //   this.setState({
-  //     isLoginHere: false
-  //   })
-  //   if (this.props.callBackLogin && this.props.callBackLogin());
-  // }
-
   onChange () {
     console.log('input change')
-  }
-
-  googleAuthRequired = () => {
-    // this.setState({
-    //     isLoginHere: false,
-    // });
-    // if (this.props.callBackLogin && this.props.callBackLogin());
-    // this.auth.signIn();
   }
 
   onSubmitClick = (event) => {
@@ -175,21 +137,13 @@ class Login extends PureComponent {
                 height: '1px',
                 marginBottom: '3px'
               }}
-            ></div>
-            <div className="login-box">
-              <span style={{ margin: '10px 0px', fontSize: '16px' }}>
+            >
+              <div className="login-box">
+                <span style={{ margin: '10px 0px', fontSize: '16px' }}>
                   Log In with Google ?{' '}
-              </span>
-              <span
-                style={{
-                  color: '#2a2aee',
-                  fontSize: '16px',
-                  cursor: 'pointer'
-                }}
-                onClick={this.googleAuthRequired}
-              >
-                  Click here
-              </span>
+                </span>
+                <a href="http://localhost:4500/api/Auth/google">Click here</a>
+              </div>
             </div>
           </div>
         </div>
