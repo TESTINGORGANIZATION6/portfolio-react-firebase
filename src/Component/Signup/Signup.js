@@ -1,19 +1,23 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import toastr from 'toastr'
+import 'toastr/build/toastr.min.css'
 import { testAction, getSignupUserId } from '../../Store/Actions'
 
 import Login from '../Login/Login'
-import './Signup.scss'
-import '../Login/Login.scss'
 import { register, checkUserName } from '../../Services/services'
 import PropTypes from 'prop-types'
+import Loader from 'react-loader-spinner'
+import './Signup.scss'
+import '../Login/Login.scss'
 
 class Signup extends PureComponent {
   constructor (props) {
     super(props)
 
     this.state = {
+      isLoader: false,
       isSignUp: true,
       isRedirectToLogin: false,
       isUserFieldCheck: false,
@@ -118,14 +122,22 @@ class Signup extends PureComponent {
       // checkUserName(userDetail.Username).then((res) => {
       //   if (res.data.success) {
       // this response should be use in message to show this user is available
+      this.setState({ isLoader: true })
       register(userDetail).then((res) => {
         // console.log('response -> ', res)
-        alert('successfullty signup')
         this.props.getSignupUserId(res.data.userId)
         // console.log(res)
         if (res.data.userId) {
           console.log(this.props)
-          this.props.history.push('/login')
+          toastr.success('Successfully Signup')
+          this.setState({ isLoader: false }, () => {
+            this.props.history.push('/login')
+          })
+        } else {
+          toastr.success('Signup failed')
+          this.setState({ isLoader: false }, () => {
+            this.props.history.push('/login')
+          })
         }
       })
       //   } else {
@@ -142,7 +154,7 @@ class Signup extends PureComponent {
 
   checkSignup () {
     const { isSignUp, inputValues, isUserFieldCheck, isUserNameValid } = this.state
-    console.log('here in Sign Up')
+    toastr.options = { positionClass: 'toast-top-center' }
     return (
       isSignUp && (
         <div id="myModal" className="signup-modal">
@@ -190,7 +202,7 @@ class Signup extends PureComponent {
                   onChange={(e) => this.onChange(e)}
                   onBlur={(e) => this.onBlur(e)}
                 />
-                <span>{ isUserFieldCheck && <i className={isUserNameValid ? 'fa fa-check green check-icon' : 'fa fa-times red check-icon'} aria-hidden="true"></i>}</span>
+                <span>{isUserFieldCheck && <i className={isUserNameValid ? 'fa fa-check green check-icon' : 'fa fa-times red check-icon'} aria-hidden="true"></i>}</span>
               </div>
               <div className="error-message">
                 {inputValues[2].isError && inputValues[2].error}
@@ -250,6 +262,19 @@ class Signup extends PureComponent {
     )
   }
 
+  checkLoader = () => {
+    const { isLoader } = this.state
+    return (
+      isLoader && (
+        <div className="loader-resto">
+          <div className="loader">
+            <Loader type="Bars" color="#00BFFF" height={40} width={40} />
+          </div>
+        </div>
+      )
+    )
+  }
+
   callBackLogin = () => {
     console.log('callback login .... ')
     this.setState({
@@ -266,6 +291,7 @@ class Signup extends PureComponent {
     return (
       <div className="Signup">
         {/* <button className='header-button' onClick={this.updateState}>Sign Up</button> */}
+        {this.checkLoader()}
         {this.checkSignup()}
         {this.checkLogin()}
       </div>
@@ -279,12 +305,12 @@ Signup.propTypes = {
   push: PropTypes.func
 }
 
-const mapStateToProps = (state) => {
-  return {
-    userId: state.data.userId,
-    loginData: state.data.loginData
-  }
-}
+// const mapStateToProps = (state) => {
+//   return {
+//     userId: state.data.userId,
+//     loginData: state.data.loginData
+//   }
+// }
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -293,4 +319,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Signup))
+export default withRouter(connect(null, mapDispatchToProps)(Signup))
