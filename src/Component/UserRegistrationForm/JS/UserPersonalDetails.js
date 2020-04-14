@@ -30,6 +30,10 @@ function UserPersonalDetails ({
     prevStep(1)
   }
 
+  const handleBlurEvent = (input) => (e) => {
+    errors[input] = null
+  }
+
   if (values.userResponse.Position !== 'defaultPlayer') {
     values.skillsSet = values.players.find(
       (cntry) => cntry.name === values.userResponse.Position
@@ -61,6 +65,7 @@ function UserPersonalDetails ({
                       value={values.userResponse.Position}
                       onChange={handlePlayerPosition('Position')}
                       className="browser-default custom-select"
+                      onBlur={handleBlurEvent('Position')}
                     >
                       <option value="defaultPlayer">--Player Position--</option>
                       {values.players.map((e, key) => {
@@ -89,6 +94,7 @@ function UserPersonalDetails ({
                     <select
                       value={values.userResponse.Role}
                       onChange={handlePlayerPosition('Role')}
+                      onBlur={handleBlurEvent('Role')}
                       className="browser-default custom-select"
                     >
                       <option value="default0">--Player Role--</option>
@@ -119,6 +125,7 @@ function UserPersonalDetails ({
                     <select
                       value={values.userResponse.Foot}
                       onChange={handlePlayerPosition('Foot')}
+                      onBlur={handleBlurEvent('Foot')}
                       className="browser-default custom-select"
                     >
                       <option defaultValue value="default">

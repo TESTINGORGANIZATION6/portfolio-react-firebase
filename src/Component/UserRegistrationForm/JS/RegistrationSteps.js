@@ -9,7 +9,10 @@ import '../CSS/Steps.scss'
 import { AddClubValidation } from './Validation'
 import toastr from 'toastr'
 import 'toastr/build/toastr.min.css'
-import { getUserDetails } from '../../../Services/playerRegistration'
+import {
+  getRegistrationDetails,
+  getUserSession
+} from '../../../Services/playerRegistration'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
@@ -18,7 +21,6 @@ class RegistrationSteps extends PureComponent {
   constructor (props) {
     super(props)
     this.state = {
-      appended: false,
       currentStep: 1,
       isLoading: true,
       isUserRegisterd: false,
@@ -37,7 +39,8 @@ class RegistrationSteps extends PureComponent {
         Nationality: 'default',
         Height: '',
         Weight: '',
-
+        file: '',
+        imagePreviewUrl: '',
         // Step 2
         Position: 'defaultPlayer',
         Role: 'default0',
@@ -111,27 +114,61 @@ class RegistrationSteps extends PureComponent {
     }
   }
 
+  handleImageChange = (e) => {
+    console.log('Image Change')
+    const reader = new FileReader()
+    const file = e.target.files[0]
+
+    reader.onloadend = () => {
+      const userResponse = { ...this.state.userResponse }
+      userResponse.file = file
+      userResponse.imagePreviewUrl = reader.result
+      this.setState({
+        userResponse
+      })
+    }
+    reader.readAsDataURL(file)
+  }
+
   componentDidMount () {
     let userLog = sessionStorage.getItem('userData')
     userLog = JSON.parse(userLog)
 
-    getUserDetails(userLog).then((res) => {
-      if (res) {
-        res.DateOfBirth = new Date(res.DateOfBirth)
-        for (let i = 0; i < res.Clubs.length; i++) {
-          if (res.Clubs[i].From !== null) {
-            res.Clubs[i].From = new Date(res.Clubs[i].From)
-          }
-          if (res.Clubs[i].To !== null) {
-            res.Clubs[i].To = new Date(res.Clubs[i].To)
-          }
+    if (userLog) {
+      getUserSession(userLog).then((res) => {
+        if (res) {
+          getRegistrationDetails(userLog).then((res) => {
+            if (res) {
+              res.DateOfBirth = new Date(res.DateOfBirth)
+              for (let i = 0; i < res.Clubs.length; i++) {
+                if (res.Clubs[i].From !== null) {
+                  res.Clubs[i].From = new Date(res.Clubs[i].From)
+                }
+                if (res.Clubs[i].To !== null) {
+                  res.Clubs[i].To = new Date(res.Clubs[i].To)
+                }
+              }
+              this.setState({
+                userResponse: res,
+                isUserRegisterd: true
+              })
+            } else {
+              const userResponse = { ...this.state.userResponse }
+              userResponse.FirstName = userLog.FirstName
+              userResponse.LastName = userLog.LastName
+              userResponse.Email = userLog.Email
+              this.setState({
+                userResponse
+              })
+            }
+          })
+        } else {
+          this.props.history.push('/login')
         }
-        this.setState({
-          userResponse: res,
-          isUserRegisterd: true
-        })
-      }
-    })
+      })
+    } else {
+      this.props.history.push('/login')
+    }
 
     this.setState({
       players: [
@@ -361,6 +398,7 @@ class RegistrationSteps extends PureComponent {
           <UserBasicDetails
             nextStep={this.nextStep}
             handleChange={this.handleChange}
+            handleImageChange={this.handleImageChange}
             handleDatePicker={this.handleDatePicker}
             values={this.state}
           />
@@ -550,7 +588,9 @@ class RegistrationSteps extends PureComponent {
 }
 
 RegistrationSteps.propTypes = {
-  loginData: PropTypes.object
+  loginData: PropTypes.object,
+  history: PropTypes.object,
+  push: PropTypes.func
 }
 
 const mapStateToProps = (state) => {

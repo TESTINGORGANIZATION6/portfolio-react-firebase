@@ -12,13 +12,11 @@ function UserContactDetails ({
   prevStep
 }) {
   const [errors, setErrors] = useState([])
-  // console.log(values)
   const handleContinue = (e) => {
     e.preventDefault()
-
     const error = UserContactValidation({ values })
     setErrors(error.errors)
-    // console.log(error);
+    console.log(error)
 
     if (error.count <= 0) {
       const userDetails = values.userResponse
@@ -35,6 +33,10 @@ function UserContactDetails ({
       }
       nextStep(6)
     }
+  }
+
+  const handleBlurEvent = (input) => (e) => {
+    errors[input] = null
   }
 
   const handleBack = (evt) => {
@@ -64,6 +66,7 @@ function UserContactDetails ({
                       placeholder="Please Enter Mobile Number"
                       type="text"
                       onChange={handleChangeMobile('MobileNumber')}
+                      onBlur={handleBlurEvent('MobileNumber')}
                       defaultValue={values.userResponse.MobileNumber}
                       minLength={10}
                       maxLength={10}
@@ -84,14 +87,17 @@ function UserContactDetails ({
                       placeholder="Please Enter Alternate Mobile Number"
                       type="text"
                       onChange={handleChangeMobile('AlternateMobileNumber')}
+                      onBlur={handleBlurEvent('AlternateMobileNumber')}
                       defaultValue={values.userResponse.AlternateMobileNumber}
                       minLength={10}
                       maxLength={10}
                       required
                     />
-                    {/* {errors.AlternateMobileNumber ? (
-                      <p className="inputError">{errors.AlternateMobileNumber}</p>
-                    ) : null} */}
+                    {errors.AlternateMobileNumber ? (
+                      <p className="inputError">
+                        {errors.AlternateMobileNumber}
+                      </p>
+                    ) : null}
                   </div>
                 </div>
               </div>
@@ -105,6 +111,7 @@ function UserContactDetails ({
                       placeholder="Please Enter EmailID"
                       type="text"
                       onChange={handleChange('Email')}
+                      onBlur={handleBlurEvent('Email')}
                       defaultValue={values.userResponse.Email}
                       required
                     />

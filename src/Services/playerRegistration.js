@@ -1,16 +1,13 @@
-import axios from 'axios'
+import axios from './index'
 
-export const getUserDetails = (userLog) => {
+export const getRegistrationDetails = (userLog) => {
   const config = {
     headers: {
       Authorization: `Bearer ${userLog.token}`
     }
   }
   return axios
-    .get(
-      `https://portfolio-api-node.herokuapp.com/api/Player?playerId=${userLog.userId}`,
-      config
-    )
+    .get(`Player?playerId=${userLog.userId}`, config)
     .then((res) => {
       return res.data
     })
@@ -27,7 +24,7 @@ export const userRegister = (userDetails, userLog) => {
   }
   return axios
     .post(
-      'https://portfolio-api-node.herokuapp.com/api/Player/create',
+      'Player/create',
       {
         UserId: userLog.userId,
         FirstName: userDetails.FirstName,
@@ -67,7 +64,7 @@ export const userUpdate = (userDetails, userLog) => {
   }
   return axios
     .post(
-      'https://portfolio-api-node.herokuapp.com/api/Player/update',
+      'Player/update',
       {
         UserId: userLog.userId,
         FirstName: userDetails.FirstName,
@@ -93,6 +90,22 @@ export const userUpdate = (userDetails, userLog) => {
     )
     .then((res) => {
       return res
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}
+
+export const getUserSession = (userLog) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${userLog.token}`
+    }
+  }
+  return axios
+    .get('User/verifysession', config)
+    .then((res) => {
+      return res.data
     })
     .catch((err) => {
       console.log(err)

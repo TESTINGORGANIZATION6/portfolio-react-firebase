@@ -6,10 +6,13 @@ import toastr from 'toastr'
 import 'toastr/build/toastr.min.css'
 import PropTypes from 'prop-types'
 import { UserBasicValidation } from './Validation'
+import '../CSS/upload.scss'
+// import CardProfile from './PhotoUpload'
 
 function UserBasicDetails ({
   values,
   handleChange,
+  handleImageChange,
   handleDatePicker,
   nextStep
 }) {
@@ -18,15 +21,17 @@ function UserBasicDetails ({
 
   const handleContinue = async (e) => {
     e.preventDefault()
-
     const error = UserBasicValidation({ values })
-    await setErrors(error.errors)
-    console.log(errors)
-
+    setErrors(error.errors)
     if (error.count <= 0) {
       toastr.success('Data Saved Successfully !!')
       nextStep(2)
     }
+  }
+
+  const handleBlurEvent = (input) => (e) => {
+    errors[input] = null
+    setErrors(errors)
   }
 
   return (
@@ -52,10 +57,12 @@ function UserBasicDetails ({
                       placeholder="First Name"
                       type="text"
                       onChange={handleChange('FirstName')}
+                      onBlur={handleBlurEvent('FirstName')}
                       defaultValue={finalValues.FirstName}
                       autoFocus
                       required
                     />
+
                     {errors.FirstName ? (
                       <p className="inputError">{errors.FirstName}</p>
                     ) : null}
@@ -70,8 +77,10 @@ function UserBasicDetails ({
                       placeholder="Last Name"
                       type="text"
                       onChange={handleChange('LastName')}
+                      onBlur={handleBlurEvent('LastName')}
                       defaultValue={finalValues.LastName}
                     />
+
                     {errors.LastName ? (
                       <p className="inputError">{errors.LastName}</p>
                     ) : null}
@@ -85,6 +94,7 @@ function UserBasicDetails ({
                     <Datepicker
                       placeholderText="Click to select a date"
                       onChange={handleDatePicker('DateOfBirth')}
+                      onBlur={handleBlurEvent('DateOfBirth')}
                       selected={finalValues.DateOfBirth}
                       className="u-full-width"
                       dateFormat="yyyy-MM-dd"
@@ -93,6 +103,7 @@ function UserBasicDetails ({
                       showYearDropdown
                       dropdownMode="select"
                     />
+
                     {errors.DateOfBirth ? (
                       <p className="inputError">{errors.DateOfBirth}</p>
                     ) : null}
@@ -107,7 +118,7 @@ function UserBasicDetails ({
                     <input
                       className="u-full-width"
                       type="text"
-                      defaultValue={values.age + ' Years'}
+                      value={values.age + ' Years'}
                       disabled
                     />
                     {errors.age ? (
@@ -127,6 +138,7 @@ function UserBasicDetails ({
                       </span>
                       <select
                         onChange={handleChange('Nationality')}
+                        onBlur={handleBlurEvent('Nationality')}
                         value={finalValues.Nationality}
                         className="browser-default custom-select"
                       >
@@ -136,6 +148,7 @@ function UserBasicDetails ({
                         <option value="india">India</option>
                         <option value="brazil">Brazil</option>
                       </select>
+
                       {errors.Nationality ? (
                         <p className="inputError">{errors.Nationality}</p>
                       ) : null}
@@ -147,12 +160,13 @@ function UserBasicDetails ({
               <div className="row">
                 <div className="col-md-5">
                   <div className="registration_fields">
-                    <label>Height*</label>
+                    <label>Height in C.M*</label>
                     <input
                       className="u-full-width"
                       placeholder="Height in C.M"
                       type="text"
                       onChange={handleChange('Height')}
+                      onBlur={handleBlurEvent('Height')}
                       defaultValue={finalValues.Height}
                       minLength={0}
                       maxLength={3}
@@ -166,18 +180,35 @@ function UserBasicDetails ({
 
                 <div className="col-md-5">
                   <div className="registration_fields">
-                    <label>Weight*</label>
+                    <label>Weight in K.G*</label>
                     <input
                       className="u-full-width"
                       placeholder="Weight In K.G"
                       type="text"
                       onChange={handleChange('Weight')}
+                      onBlur={handleBlurEvent('Weight')}
                       defaultValue={finalValues.Weight}
                       maxLength={3}
                     />
                     {errors.Weight ? (
                       <p className="inputError">{errors.Weight}</p>
                     ) : null}
+                  </div>
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="col-md-12">
+                  <div
+                    className="registration_fields"
+                    style={{ paddingBottom: '0' }}
+                  >
+                    <label>Upload a Photo*</label>
+
+                    {/* <CardProfile
+                      handleImageChange={handleImageChange}
+                      values={values}
+                    /> */}
                   </div>
                 </div>
               </div>
@@ -196,6 +227,7 @@ UserBasicDetails.propTypes = {
   values: PropTypes.object,
   handleChange: PropTypes.func,
   handleDatePicker: PropTypes.func,
+  handleImageChange: PropTypes.func,
   nextStep: PropTypes.func
 }
 
