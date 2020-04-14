@@ -8,7 +8,7 @@
 .player_information_form{padding: 10px 0 30px;}
 .player_basic_information {box-shadow: 0 6px 3px -9px rgba(0, 0, 0, 0.16), 0 1px 3px 0px rgba(0, 0, 0, 0.23);background: #fff;}
 .registration_fields{display: flex;flex-direction: column;padding: 10px 0 25px;}
-.registration_fields label{margin: 0;font-size: 14px;color: #e44545;padding-bottom: 5px;font-weight: 600;text-align: left;}
+.registration_fields label{margin: 0;font-size: 14px;color: #e44545;padding-bottom: 5px;text-align: left;font-family: 'robotomedium';}
 .registration_fields .u-full-width{border: none;border-bottom: 1px solid #ccc;width: 100%;margin-bottom: 5px;font-size: 14px;}
 .registration_fields .u-full-width:focus{box-shadow: none;outline: none;transition: transform .5s ease;}
 
@@ -30,9 +30,9 @@
 .customDropDownArrow span{position: absolute;right: 10px;top: 50%; transform: translate(-50%,-50%) rotate(45deg);}
 .customDropDownArrow span i{border: solid #e44545;border-width: 0 1px 1px 0;display: inline-block;padding: 3px;}
 
-.clubsBtn{width: auto !important;padding: 0 10px !important;margin-bottom: 0 !important;font-weight: bold;padding-left: 0 !important;color: #e44545;text-decoration: underline;padding-top: 15px !important;cursor: pointer;}
+.clubsBtn{width: auto !important;padding: 0 10px !important;margin-bottom: 0 !important;font-family: 'robotomedium';padding-left: 0 !important;color: #e44545;text-decoration: underline;padding-top: 15px !important;cursor: pointer;}
 
-.rangeLabel{position: absolute;right: -10px;bottom: 5px;color: #e44545;font-weight: 700;}  
+.rangeLabel{position: absolute;right: -10px;bottom: 5px;color: #e44545;font-family: 'robotobold';}  
 .player_basic_information-Range .registration_fields label{padding-bottom: 15px;}
 .css-yvszuv-Slider{cursor: pointer;width: 100% !important;height: 3px !important;}
 .css-3g5hux-Slider{background: #e44545 !important;}
@@ -44,7 +44,7 @@
 .hero{background-color:#e44545;position:relative;height:37px;width:7px;}
 .triangle-right{position:relative;}
 .triangle-right::after{width:0;width:0;height:0;border-top:6px solid transparent;border-left:7px solid #e44545;border-bottom:6px solid transparent;position:absolute;transform:translate(-50%, -50%);content:"";right:-10px;}
-.first-application-data{padding-bottom:3px;padding-left:20px;font-size:18px;font-weight:700;text-transform:capitalize;color:#90133c;}
+.first-application-data{padding-bottom:3px;padding-left:20px;font-size:18px;text-transform:capitalize;color:#90133c;font-family: 'robotobold';}
 .player_information_box{padding:0px 30px 30px;}
 
 /* CSS FOR HEADER LABEL ICON ENDS HERE */
@@ -79,11 +79,11 @@ li.Multistep--stepsBarList.isvisited:not(:first-child)::after{background:#e44545
 
 /* CSS FOR FINAL REVIEW PAGE STARTS HERE */
 
-.reviewData--header{font-size:14px;color:#0095da;text-transform: capitalize;font-weight: 600;}
-.reviewData--value{font-size:14px;color:#000;font-weight:600;text-transform:capitalize;}
+.reviewData--header{font-size:14px;color:#0095da;text-transform: capitalize;font-family: 'robotomedium';margin: 0;padding-bottom: 10px;}
+.reviewData--value{font-size:14px;color:#000;font-family: 'robotomedium';text-transform:capitalize;margin: 0;padding-bottom: 10px;}
 h1.FinalReviewHeader::after{content:"";position:absolute;width:200px;height:2px;background:red;left:0;bottom:-9px;}
 .reviewData{padding:10px 0;}
-.FinalReviewHeader{font-size:20px;margin:0;font-weight:bold;position:relative;padding:30px 0 0;}
+.FinalReviewHeader{font-size:20px;margin:0; position:relative;padding:30px 0 0;font-family: 'robotobold';}
 .FinalReviewHeaderRow:not(:last-child){background-image:linear-gradient(to right, black 33%, rgba(255,255,255,0) 0%);background-position:bottom;background-size:13px 1px;background-repeat:repeat-x;}
 .FinalReviewHeader{padding:20px 0 0;}
 .row.FinalReviewHeaderRow{padding:20px 0;}
@@ -101,7 +101,7 @@ h1.FinalReviewHeader::after{content:"";position:absolute;width:200px;height:2px;
 .PrevClubData .reviewData {padding: 2px 0;}
 .FinalReviewHeaderClubRow{ padding-bottom: 20px;}
 .noteBox{font-size: 12px;color: red;font-weight: 600;padding-left: 15px;}
-.inputError {position: absolute;bottom: -15px;color: #fff;background: #d64242;font-size: 12px;border-radius: 5px;padding: 4px 10px;transition: .3s all;}
+.inputError {position: absolute;bottom: -15px;color: #fff;background: #d64242;font-size: 10px;border-radius: 5px;padding: 3px 9px;transition: .3s all;}
 .browser-default.custom-select{height: auto !important;}
 .customDropDownArrow .inputError{bottom: -45px;transition: .3s all;}
 .registration_fields textarea{font-size: 14px;}
@@ -112,9 +112,9 @@ h1.FinalReviewHeader::after{content:"";position:absolute;width:200px;height:2px;
 .reviewData .rangeslider , .registration_fields .rangeslider {margin: 0 !important;background: #e6e5ea !important;}
 .rangeslider-horizontal .rangeslider__fill{background-image: linear-gradient(to right, #b94a48 30%, #f1c40f 45%, #4bc67d 99%) !important;}
 .reviewData .slider{margin: 20px 0;}
-.mandatoryText{color: #e44545;font-weight: 700;font-size: 12px;text-align: right;padding: 10px 0;}
+.mandatoryText{color: #e44545;font-size: 12px;text-align: right;padding: 10px 0;font-family: 'robotomedium';}
 .rangeslider-horizontal .rangeslider__handle{background: url('../../../Images/soccer.svg');width: 100px;height: 100px;}
-.registration_Wrapper{background: #f2f3f8;}
+.registration_Wrapper{background: #f2f3f8;padding-top: 5rem;}
 .registration_fieldsDatePicker .react-datepicker__current-month,.registration_fieldsDatePicker .react-datepicker-time__header, .registration_fieldsDatePicker .react-datepicker-year-header{display: none;}
 .registration_fieldsDatePicker .react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle::before , .registration_fieldsDatePicker .react-datepicker-popper[data-placement^="top"] .react-datepicker__triangle , .registration_fieldsDatePicker  .react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle{border: none;}
 .registration_fieldsDatePicker .react-datepicker__header{background-color: #ffffff;border-bottom: none;}
@@ -124,9 +124,32 @@ h1.FinalReviewHeader::after{content:"";position:absolute;width:200px;height:2px;
 
 /* CSS FOR CUSTOM TOAST NOTIFICATION STARTS HERE  */
 .toast-success {background-color: #51A351 !important;}
-.toast-warning{background: #FFCF06 !important;}
-.toast-warning{background: rgb(255, 86, 48) !important}
+// .toast-warning{background: #FFCF06 !important;}
+.toast-error{background: red !important}
 /* CSS FOR CUSTOM TOAST NOTIFICATION ENDS HERE  */
 
 .loader-resto {position: fixed;height: 100%;width: 100%;left: 50%;top: 50%;transform: translate(-50%, -50%);transition: opacity 0.3s ease-out 0s, visibility 0.3s ease-out 0s;background-color: rgba(0, 0, 0, 0.3);z-index: 9999;}
 .loader{left: 50%;position: fixed;top: 50%;transform: translate(-50%,-50%);}
+.previousClub .fa-trash:before{position: absolute;right: 20px;top: 10px;}
+
+
+.registration_fields input::-webkit-outer-spin-button,
+.registration_fields input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.registration_fields  input[type=number] {
+  -moz-appearance: textfield;
+}
+
+
+@media only screen and (max-width:767px) {
+    .player_information_box .col-md-1{display: none;}
+    .player_information_box .col-md-5{width: 50%;}
+}
+
+@media only screen and (max-width:480px) {
+    .player_information_box .col-md-5{width: 100%;}
+}

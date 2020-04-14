@@ -8,8 +8,7 @@ function UserFinalForm ({ values, userLog, nextStep, prevStep }) {
   const handleContinue = (evt) => {
     evt.preventDefault()
     console.log(userLog)
-    sessionStorage.removeItem('userData')
-    userLog.history.push('/login')
+    userLog.history.push('/dashboard')
   }
 
   const handleBack = (evt) => {
@@ -189,41 +188,18 @@ function UserFinalForm ({ values, userLog, nextStep, prevStep }) {
               <div className="FinalReviewHeaderRow FinalReviewHeaderClubRow">
                 <>
                   <h1 className="FinalReviewHeader">Club Experiance</h1>
-                  <div className="row clubCurrentTable">
-                    <div className="col-md-4">
-                      <div className="reviewData">
-                        <p className="reviewData--header">
-                          Previously Played Clubs
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="col-md-2">
-                      <div className="reviewData">
-                        <p className="reviewData--header">From Date</p>
-                      </div>
-                    </div>
-
-                    <div className="col-md-2">
-                      <div className="reviewData">
-                        <p className="reviewData--header">To Date</p>
-                      </div>
-                    </div>
-                    <div className="col-md-4">
-                      <div className="reviewData">
-                        <p className="reviewData--header">Achievements</p>
-                      </div>
-                    </div>
-                  </div>
                 </>
 
                 {finalValues.Clubs.length > 0 ? (
-                  <div className="PrevClubData">
+                  <div className="PrevClubData" style={{ paddingTop: '25px' }}>
                     {finalValues.Clubs.map((e, key) => {
                       return (
                         <div className="row" key={key}>
                           <div className="col-md-4">
                             <div className="reviewData">
+                              <p className="reviewData--header">
+                                Previously Played Clubs
+                              </p>
                               <p className="reviewData--value">
                                 {e.ClubName === ''
                                   ? 'Not Associated with any club'
@@ -233,6 +209,7 @@ function UserFinalForm ({ values, userLog, nextStep, prevStep }) {
                           </div>
                           <div className="col-md-2">
                             <div className="reviewData">
+                              <p className="reviewData--header">From Date</p>
                               <p className="reviewData--value">
                                 {e.From === null
                                   ? '-'
@@ -242,6 +219,7 @@ function UserFinalForm ({ values, userLog, nextStep, prevStep }) {
                           </div>
                           <div className="col-md-2">
                             <div className="reviewData">
+                              <p className="reviewData--header">To Date</p>
                               <p className="reviewData--value">
                                 {e.To === null
                                   ? '-'
@@ -252,6 +230,7 @@ function UserFinalForm ({ values, userLog, nextStep, prevStep }) {
 
                           <div className="col-md-4">
                             <div className="reviewData">
+                              <p className="reviewData--header">Achievements</p>
                               <p className="reviewData--value">
                                 {e.Achievements === '' ? '' : e.Achievements}
                               </p>

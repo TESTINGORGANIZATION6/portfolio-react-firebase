@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import '../Style/stylesheet.css'
 import Header from '../Component/Header/Header'
 import Dashboard from '../Component/Dashboard/Dashboard.js'
 import Signup from '../Component/Signup/Signup'

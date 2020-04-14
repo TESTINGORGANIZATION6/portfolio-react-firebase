@@ -11,6 +11,10 @@ export const UserBasicValidation = (e) => {
     errors.FirstName = 'FirstName cannot be Empty !!'
     count = count + 1
   } else if (fields.FirstName !== '') {
+    if (fields.FirstName.length <= 2) {
+      errors.FirstName = 'FirstName length should be more than 2 !!'
+      count = count + 1
+    }
     if (!fields.FirstName.match(/^[a-zA-Z]+$/)) {
       errors.FirstName = 'FirstName cannot contains spaces or Numbers !!'
       count = count + 1
@@ -21,6 +25,10 @@ export const UserBasicValidation = (e) => {
     errors.LastName = 'LastName cannot be Empty !!'
     count = count + 1
   } else if (fields.LastName !== '') {
+    if (fields.LastName.length <= 2) {
+      errors.LastName = 'LastName length should be more than 2 !!'
+      count = count + 1
+    }
     if (!fields.LastName.match(/^[a-zA-Z]+$/)) {
       errors.LastName = 'LastName cannot contaims spaces or Numbers !!'
       count = count + 1
@@ -28,7 +36,7 @@ export const UserBasicValidation = (e) => {
   }
 
   if (fields.DateOfBirth === null) {
-    errors.DateOfBirth = 'Date of birth Cannot be Empty !!'
+    errors.DateOfBirth = 'Please Enter the valid DOB !!'
     count = count + 1
   } else {
     const agedata = new Date().getFullYear() - fields.DateOfBirth.getFullYear()
@@ -58,7 +66,7 @@ export const UserBasicValidation = (e) => {
 }
 
 export const UserPersonalValidation = (e) => {
-  const fields = e.values
+  const fields = e.values.userResponse
   const errors = []
   let count = 0
 
@@ -169,8 +177,7 @@ export const UserContactValidation = (e) => {
   }
 
   if (fields.MobileNumber === fields.AlternateMobileNumber) {
-    errors.AlternateMobileNumber =
-      'Alternate Number and Mobile Number cannot be same'
+    errors.AlternateMobileNumber = 'Cannot be Same as Mobile Number'
     count = count + 1
   }
 
