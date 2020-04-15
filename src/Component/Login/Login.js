@@ -142,7 +142,7 @@ class Login extends PureComponent {
                 <span style={{ margin: '10px 0px', fontSize: '16px' }}>
                   Log In with Google ?{' '}
                 </span>
-                <a href="https://salty-citadel-56178.herokuapp.com/api/Auth/google">Click here</a>
+                <a href="https://portfolio-api-node.herokuapp.com/api/Auth/google">Click here</a>
               </div>
             </div>
           </div>
