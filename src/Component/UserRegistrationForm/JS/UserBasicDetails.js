@@ -7,7 +7,7 @@ import 'toastr/build/toastr.min.css'
 import PropTypes from 'prop-types'
 import { UserBasicValidation } from './Validation'
 import '../CSS/upload.scss'
-// import CardProfile from './PhotoUpload'
+import CardProfile from './PhotoUpload'
 
 function UserBasicDetails ({
   values,
@@ -32,6 +32,13 @@ function UserBasicDetails ({
   const handleBlurEvent = (input) => (e) => {
     errors[input] = null
     setErrors(errors)
+  }
+
+  if (values.userResponse.DateOfBirth !== null) {
+    var today = new Date()
+    var birthDate = new Date(values.userResponse.DateOfBirth)
+    var ageNow = today.getFullYear() - birthDate.getFullYear()
+    values.age = ageNow
   }
 
   return (
@@ -205,10 +212,10 @@ function UserBasicDetails ({
                   >
                     <label>Upload a Photo*</label>
 
-                    {/* <CardProfile
+                    <CardProfile
                       handleImageChange={handleImageChange}
                       values={values}
-                    /> */}
+                    />
                   </div>
                 </div>
               </div>

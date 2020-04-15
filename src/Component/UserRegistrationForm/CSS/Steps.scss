@@ -144,6 +144,7 @@ h1.FinalReviewHeader::after{content:"";position:absolute;width:200px;height:2px;
   -moz-appearance: textfield;
 }
 
+.ImagePreview{width: 100px;border: 1px solid;height: 100px;}
 
 @media only screen and (max-width:767px) {
     .player_information_box .col-md-1{display: none;}
@@ -153,3 +154,4 @@ h1.FinalReviewHeader::after{content:"";position:absolute;width:200px;height:2px;
 @media only screen and (max-width:480px) {
     .player_information_box .col-md-5{width: 100%;}
 }
+

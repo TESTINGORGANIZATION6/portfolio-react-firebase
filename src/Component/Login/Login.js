@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import toastr from 'toastr'
 import 'toastr/build/toastr.min.css'
-import { testAction, getLoginUserId, getLoginDetailInfo } from '../../Store/Actions'
+import { testAction, getLoginDetailInfo } from '../../Store/Actions'
 import './Login.scss'
 import { login } from '../../Services/services'
 import PropTypes from 'prop-types'
@@ -153,11 +153,11 @@ class Login extends PureComponent {
 }
 
 Login.propTypes = {
-  callBackLogin: PropTypes.func,
-  getLoginUserId: PropTypes.func,
+  // callBackLogin: PropTypes.func,
+  // getLoginUserId: PropTypes.func,
   getLoginDetailInfo: PropTypes.func,
-  history: PropTypes.object,
-  push: PropTypes.func
+  history: PropTypes.object
+  // push: PropTypes.func
 }
 
 // const mapStateToProps = (state) => {
@@ -170,8 +170,9 @@ Login.propTypes = {
 const mapDispatchToProps = (dispatch) => {
   return {
     testAction: () => dispatch(testAction()),
-    getLoginUserId: (loginData) => dispatch(getLoginUserId(loginData)),
-    getLoginDetailInfo: (userDetails) => dispatch(getLoginDetailInfo(userDetails))
+    // getLoginUserId: (loginData) => dispatch(getLoginUserId(loginData)),
+    getLoginDetailInfo: (userDetails) =>
+      dispatch(getLoginDetailInfo(userDetails))
   }
 }
 

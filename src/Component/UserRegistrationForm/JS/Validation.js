@@ -1,4 +1,3 @@
-// import moment from "moment";
 import toastr from 'toastr'
 import 'toastr/build/toastr.min.css'
 
@@ -10,7 +9,7 @@ export const UserBasicValidation = (e) => {
   if (!fields.FirstName) {
     errors.FirstName = 'FirstName cannot be Empty !!'
     count = count + 1
-  } else if (fields.FirstName !== '') {
+  } else {
     if (fields.FirstName.length <= 2) {
       errors.FirstName = 'FirstName length should be more than 2 !!'
       count = count + 1
@@ -24,7 +23,7 @@ export const UserBasicValidation = (e) => {
   if (!fields.LastName) {
     errors.LastName = 'LastName cannot be Empty !!'
     count = count + 1
-  } else if (fields.LastName !== '') {
+  } else {
     if (fields.LastName.length <= 2) {
       errors.LastName = 'LastName length should be more than 2 !!'
       count = count + 1
@@ -156,22 +155,22 @@ export const UserContactValidation = (e) => {
   const fields = e.values.userResponse
   const errors = []
   let count = 0
-
   if (!fields.MobileNumber) {
-    errors.MobileNumber = 'Invalid MobileNumber Number'
+    errors.MobileNumber = 'Invalid Number'
     count = count + 1
-  } else if (fields.MobileNumber !== '') {
+  } else {
     if (fields.MobileNumber.length <= 9) {
-      errors.MobileNumber = 'Please Enter the correct MobileNumber Number'
+      errors.MobileNumber = 'Please Enter the correct Number'
       count = count + 1
     }
   }
 
   if (!fields.AlternateMobileNumber) {
-  } else if (fields.AlternateMobileNumber !== '') {
+    errors.AlternateMobileNumber = null
+  } else {
     if (fields.AlternateMobileNumber.length <= 9) {
       errors.AlternateMobileNumber =
-        'Please Enter the correct MobileNumber Number'
+        'Please Enter the correct Number'
       count = count + 1
     }
   }

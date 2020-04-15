@@ -22,6 +22,7 @@ function UserFinalForm ({ values, userLog, nextStep, prevStep }) {
     ).techAbilities
   }
   const finalValues = values.userResponse
+  console.log(finalValues)
   return (
     <>
       <div className="player_information_form">
@@ -41,6 +42,24 @@ function UserFinalForm ({ values, userLog, nextStep, prevStep }) {
                   Basic Information
                 </h1>
                 <div className="row FinalReviewHeaderRow">
+                  <div className="col-md-12">
+                    <div className="reviewData">
+                      <p className="reviewData--header">Profile Photo</p>
+                      {finalValues.Photo === '' ? (
+                        <img
+                          className="ImagePreview"
+                          src={require('../../../Images/profile.jpg')}
+                          alt=""
+                        />
+                      ) : (
+                        <img
+                          className="ImagePreview"
+                          src={finalValues.Photo}
+                          alt=""
+                        />
+                      )}
+                    </div>
+                  </div>
                   <div className="col-md-4">
                     <div className="reviewData">
                       <p className="reviewData--header">Firstname</p>
