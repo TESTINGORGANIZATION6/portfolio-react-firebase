@@ -89,8 +89,8 @@ class Dashboard extends PureComponent {
 }
 
 Dashboard.propTypes = {
-  history: PropTypes.object,
-  push: PropTypes.func
+  history: PropTypes.object
+  // push: PropTypes.func
 }
 
 export default withRouter(Dashboard)

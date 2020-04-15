@@ -20,6 +20,8 @@ function UserTechnicalAbilities ({
     prevStep(2)
   }
 
+  // debugger
+
   if (values.userResponse.Position !== 'defaultPlayer') {
     // values.skillsSet = values.players.find(
     //   cntry => cntry.name === values.userResponse.Position
@@ -54,7 +56,10 @@ function UserTechnicalAbilities ({
                           <Slider
                             min={0}
                             max={5}
-                            onChange={handleSliderChange.bind(this, e)}
+                            onChange={handleSliderChange.bind(
+                              values.userResponse.Ratings[e],
+                              e
+                            )}
                             value={values.userResponse.Ratings[e]}
                           />
                           <div className="value">

@@ -9,12 +9,12 @@ class CardProfile extends PureComponent {
   }
 
   render () {
-    const FilePath = this.props.values.userResponse.file
-    console.log(FilePath)
-    const { imagePreviewUrl } = this.props.values.userResponse
+    // const FilePath = this.props.values.userResponse
+    // console.log(FilePath.file)
+    const { Photo } = this.props.values.userResponse
     let $imagePreview = null
-    if (imagePreviewUrl) {
-      $imagePreview = <img src={imagePreviewUrl} alt="" />
+    if (Photo) {
+      $imagePreview = <img src={Photo} alt="" />
     } else {
       $imagePreview = (
         <div className="previewText">
@@ -45,15 +45,17 @@ class CardProfile extends PureComponent {
             </label>
           </div>
           <div>
-            {/* {FilePath !=="" ? (
+            {Photo !== '' ? (
               <label className="imageUploadStatusSuccess">
-                Image {FilePath.name}  Uploaded Successfully.
+                Image{' '}
+                {/* {FilePath.name} */}
+                  Uploaded Successfully.
               </label>
             ) : (
               <label className="imageUploadStatus">
                 Please Choose Image to Upload
               </label>
-            )} */}
+            )}
           </div>
         </form>
       </div>
@@ -62,8 +64,6 @@ class CardProfile extends PureComponent {
 }
 
 CardProfile.propTypes = {
-  history: PropTypes.object,
-  push: PropTypes.func,
   values: PropTypes.object,
   handleImageChange: PropTypes.func
 }
