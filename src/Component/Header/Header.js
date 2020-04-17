@@ -9,9 +9,9 @@ import { login } from '../../Services/services'
 class Header extends PureComponent {
   constructor (props) {
     super(props)
-    console.log('header constructor', this.props)
     this.state = {
-      isLogin: false
+      isLogin: false,
+      userLog: null
     }
   }
 
@@ -24,7 +24,7 @@ class Header extends PureComponent {
   }
 
   updateLogout = () => {
-    console.log('On logout button click', this.props)
+    sessionStorage.clear()
     this.props.history.push('/login')
   }
 
@@ -50,22 +50,24 @@ class Header extends PureComponent {
   }
 
   render () {
-    const { userDetails } = this.props
-    console.log('render header', this.props)
-    const { isLogin } = this.state
+    let { isLogin } = this.state
+    const userDetails = JSON.parse(sessionStorage.getItem('userData'))
+    if (userDetails) {
+      isLogin = true
+    }
     return (
       <div className='Header-wrapper'>
-        {isLogin
-          ? <div className='authentication'>
-            <button className='header-button' onClick={this.updateHome}>Home</button>
-            <button className='header-button' onClick={this.updateLogout}>Log in</button>
-          </div>
-          : <div className='authentication'>
-            <button className='header-button' onClick={this.updateHome}>Home</button>
-            <button className='header-button' onClick={this.updateSignup}>Sign Up</button>
-            <button className='header-button' onClick={this.updateLogin}>Log in</button>
-          </div>
-        }
+        <div className='authentication'>
+          <button className='header-button' onClick={this.updateHome}>Home</button>
+          {isLogin
+            ? <button className='header-button' onClick={this.updateLogout}>Log out</button>
+            : <>
+              <button className='header-button' onClick={this.updateSignup}>Sign Up</button>
+              <button className='header-button' onClick={this.updateLogin}>Log in</button>
+            </>
+          }
+        </div>
+
         {/* <div className="logo">
             <i className="fa fa-hand-lizard-o" aria-hidden="true"></i>
           </div> */}
@@ -81,16 +83,10 @@ class Header extends PureComponent {
 Header.propTypes = {
   history: PropTypes.object,
   push: PropTypes.func,
-  userDetails: PropTypes.object,
   FirstName: PropTypes.string,
   LastName: PropTypes.string,
   location: PropTypes.object
 }
 
-const mapStateToProps = (state) => {
-  return {
-    userDetails: state.data.userDetails
-  }
-}
-export default withRouter(connect(mapStateToProps, null)(Header))
+export default withRouter(connect()(Header))
 // export default withRouter(Header)

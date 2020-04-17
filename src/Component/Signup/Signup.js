@@ -64,13 +64,6 @@ class Signup extends PureComponent {
     })
   }
 
-  // updateOnCloseClick = () => {
-  //     console.log("here on click");
-  //     this.setState({
-  //         isSignUp: false
-  //     });
-  // }
-
   onChange () {
     console.log('input change')
   }
@@ -104,13 +97,22 @@ class Signup extends PureComponent {
     const updatedInputValues = [...inputValues]
     const email_reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/ // eslint-disable-line
     // const number_reg = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+    const isContainNumber = /\d/ // eslint-disable-line
 
     event.preventDefault()
     updatedInputValues.forEach((inputValue, index) => {
       inputValue.value = event.target[index].value
     })
     updatedInputValues[0].isError = !event.target[0].value.length
+    if (isContainNumber.test(updatedInputValues[0].value)) {
+      updatedInputValues[0].isError = true
+      updatedInputValues[0].error = 'First Name should not contain number'
+    }
     updatedInputValues[1].isError = !event.target[1].value.length
+    if (isContainNumber.test(updatedInputValues[1].value)) {
+      updatedInputValues[1].isError = true
+      updatedInputValues[1].error = 'First Name should not contain number'
+    }
     updatedInputValues[2].isError = !event.target[2].value.length
     // updatedInputValues[1].isError = !number_reg.test(updatedInputValues[1].value);
     updatedInputValues[3].isError = !email_reg.test(updatedInputValues[3].value)
@@ -167,7 +169,7 @@ class Signup extends PureComponent {
         <div id="myModal" className="signup-modal">
           <div className="modal-content">
             {/* <span className="close" onClick={this.updateOnCloseClick}>&times;</span> */}
-            <div style={{ fontSize: '22px' }}>Create a New Account</div>
+            <div style={{ fontSize: '22px', fontFamily: 'robotobold' }}>Create a New Account</div>
             <div>
               <img
                 src={require('../../Images/signup.png')}
@@ -261,7 +263,7 @@ class Signup extends PureComponent {
                 marginBottom: '3px'
               }}
             ></div>
-            <div className="signup-box">
+            <div className="signup-box-footer" style={{ fontSize: '22px', fontFamily: 'robotomedium' }}>
               <span style={{ margin: '10px 0px', fontSize: '18px' }}>
                 Have an account ?{' '}
               </span>

@@ -5,11 +5,17 @@
     position: fixed;
     display: flex;
     top: 0;
-    // background-color: #00000087;
-    background:#0346bcbd;
+    background:#001b4a;
     font-size: 20px;
     padding: 10px;
     z-index: 9999;
+    animation-name: movingHeader;
+    animation-duration: 0.8s;
+
+    @keyframes movingHeader {
+        from {top: -100px}
+        to {top: 0}
+    }
 
     .authentication {
         position: relative;
