@@ -82,9 +82,6 @@ class Header extends PureComponent {
 
 Header.propTypes = {
   history: PropTypes.object,
-  push: PropTypes.func,
-  FirstName: PropTypes.string,
-  LastName: PropTypes.string,
   location: PropTypes.object
 }
 
