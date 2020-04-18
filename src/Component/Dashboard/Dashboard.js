@@ -33,7 +33,7 @@ class Dashboard extends PureComponent {
             <div className="face face1">
               <div className="content">
                 <img src={require('../../Images/resume.png')} alt="Resume" />
-                <h3>Add Information</h3>
+                <h4>Add Information</h4>
               </div>
             </div>
             <div className="face face2">
@@ -52,7 +52,7 @@ class Dashboard extends PureComponent {
             <div className="face face1">
               <div className="content">
                 <img src={require('../../Images/user.png')} alt="User" />
-                <h3>View portfolio</h3>
+                <h4>View portfolio</h4>
               </div>
             </div>
             <div className="face face2">
@@ -71,7 +71,7 @@ class Dashboard extends PureComponent {
             <div className="face face1">
               <div className="content">
                 <img src={require('../../Images/eye.png')} alt="eye" />
-                <h3>Visited By</h3>
+                <h4>Visited By</h4>
               </div>
             </div>
             <div className="face face2">

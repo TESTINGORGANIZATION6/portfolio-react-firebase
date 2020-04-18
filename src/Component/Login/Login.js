@@ -32,6 +32,10 @@ class Login extends PureComponent {
     }
   }
 
+  redirectToSignupPage = () => {
+    this.props.history.push('/signup')
+  }
+
   onChange () {
     console.log('input change')
   }
@@ -134,15 +138,38 @@ class Login extends PureComponent {
             <div
               style={{
                 backgroundColor: 'orangered',
-                height: '1px',
-                marginBottom: '20px'
+                height: '1px'
+                // marginBottom: '20px'
               }}
-            >
-              <div className="login-box-footer" style={{ fontFamily: 'robotomedium' }}>
-                <span style={{ margin: '10px 0px', fontSize: '16px' }}>
-                  Log In with Google ?{' '}
-                </span>
-                <a href="https://portfolio-api-node.herokuapp.com/api/Auth/google">Click here</a>
+            ></div>
+            <div className="login-box-footer" style={{ fontSize: '22px', fontFamily: 'robotomedium' }}>
+              <span style={{ margin: '10px 0px', fontSize: '18px' }}>
+                Dont have an account ?{' '}
+              </span>
+              <span
+                style={{
+                  color: '#2a2aee',
+                  fontSize: '18px',
+                  cursor: 'pointer'
+                }}
+                onClick={this.redirectToSignupPage}
+              >
+                Sign up
+              </span>
+            </div>
+            {/* <a href="https://portfolio-api-node.herokuapp.com/api/Auth/google">Click here</a> */}
+            <div className="social-icons-button">
+              <div className="facebook commonBtn">
+                <a href="https://portfolio-api-node.herokuapp.com/api/Auth/google"><i className="fa fa-facebook" aria-hidden="true"></i></a>
+              </div>
+              <div className="google commonBtn">
+                <a><i className="fa fa-google-plus" aria-hidden="true"></i></a>
+              </div>
+              <div className="instagram commonBtn">
+                <a><i className="fa fa-instagram" aria-hidden="true"></i></a>
+              </div>
+              <div className="twitter commonBtn">
+                <a><i className="fa fa-twitter" aria-hidden="true"></i></a>
               </div>
             </div>
           </div>
