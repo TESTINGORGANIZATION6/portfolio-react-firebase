@@ -18,8 +18,9 @@ class Header extends PureComponent {
   }
 
   handleSidebar = (e) => {
+    const toggleSideBar = !this.state.sidebar
     this.setState({
-      sidebar: !this.state.sidebar
+      sidebar: toggleSideBar
     })
   };
 
