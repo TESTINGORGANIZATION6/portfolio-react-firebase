@@ -17,7 +17,10 @@ export const dataReducer = (data = storeData, action) => {
 
   if (action.type === 'GET_USERDETAILS') {
     console.log('GET_USERDETAILS', action.payload)
-    return { ...data, userDetails: action.payload }
+    return {
+      ...data,
+      userDetails: action.payload
+    }
   }
 
   return data

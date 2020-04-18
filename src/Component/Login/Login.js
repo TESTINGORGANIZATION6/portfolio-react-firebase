@@ -95,7 +95,7 @@ class Login extends PureComponent {
         <div id="myModal" className="login-modal">
           <div className="modal-content">
             {/* <span className="close" onClick={this.updateOnCloseClick}>&times;</span> */}
-            <div style={{ fontSize: '22px' }}>Log In</div>
+            <div style={{ fontSize: '22px', fontFamily: 'robotobold' }}>Log In</div>
             <div>
               <img
                 src={require('../../Images/login.png')}
@@ -138,7 +138,7 @@ class Login extends PureComponent {
                 marginBottom: '20px'
               }}
             >
-              <div className="login-box">
+              <div className="login-box-footer" style={{ fontFamily: 'robotomedium' }}>
                 <span style={{ margin: '10px 0px', fontSize: '16px' }}>
                   Log In with Google ?{' '}
                 </span>

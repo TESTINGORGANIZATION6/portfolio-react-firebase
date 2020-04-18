@@ -321,17 +321,17 @@ class RegistrationSteps extends PureComponent {
     this.setState({ userResponse })
   }
 
-  handleChangeMobile = (input) => async (e) => {
+  handleChangeMobile = (input) => (e) => {
     const userResponse = { ...this.state.userResponse }
     userResponse[input] = e.target.value
     this.setState({ userResponse })
   }
 
-  handleDatePicker = (input) => async (date) => {
+  handleDatePicker = (input) => (date) => {
     const userResponse = { ...this.state.userResponse }
     userResponse[input] = date
 
-    await this.setState({ userResponse })
+    this.setState({ userResponse })
     console.log(this.state.userResponse.DateOfBirth)
 
     if (input === 'DateOfBirth') {
@@ -352,10 +352,10 @@ class RegistrationSteps extends PureComponent {
     this.setState({ userResponse })
   }
 
-  handleSliderChange = async (field, val) => {
+  handleSliderChange = (field, val) => {
     const fields = this.state.userResponse.Ratings
     fields[field] = val
-    await this.setState({ fields })
+    this.setState({ fields })
     this.forceUpdate()
   }
 
@@ -374,12 +374,12 @@ class RegistrationSteps extends PureComponent {
       ...this.state.userResponse.Clubs.slice(0, i)
     ]
     this.state.userResponse.Clubs = Clubs
-    await this.setState({
+    this.setState({
       Clubs
     })
   }
 
-  handleChangeSteps = async (e) => {
+  handleChangeSteps = (e) => {
     const topSteps = this.setTopBar(e)
     this.setState({ currentStep: topSteps })
     console.log(topSteps)
