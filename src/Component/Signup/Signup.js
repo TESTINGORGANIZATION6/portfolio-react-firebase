@@ -86,6 +86,7 @@ class Signup extends PureComponent {
   }
 
   redirectToLoginPage = () => {
+    this.props.history.push('/login')
     this.setState({
       isSignUp: false,
       isRedirectToLogin: true
@@ -315,7 +316,7 @@ class Signup extends PureComponent {
         {/* <button className='header-button' onClick={this.updateState}>Sign Up</button> */}
         {this.checkLoader()}
         {this.checkSignup()}
-        {this.checkLogin()}
+        {/* {this.checkLogin()} */}
       </div>
     )
   }
