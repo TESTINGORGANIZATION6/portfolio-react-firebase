@@ -18,7 +18,7 @@ class Header extends PureComponent {
   }
 
   handleSidebar = (e) => {
-    this.setState(prevstate => ({ sidebar: !prevstate.sidebar}));
+    this.setState(prevstate => ({ sidebar: !prevstate.sidebar }))
   };
 
   handleOverlay = (e) => {
