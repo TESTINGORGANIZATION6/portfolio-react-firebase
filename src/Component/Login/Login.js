@@ -160,7 +160,7 @@ class Login extends PureComponent {
             {/* <a href="https://portfolio-api-node.herokuapp.com/api/Auth/google">Click here</a> */}
             <div className="social-icons-button">
               <div className="facebook commonBtn">
-                <a href="https://portfolio-api-node.herokuapp.com/api/Auth/google"><i className="fa fa-facebook" aria-hidden="true"></i>{null}</a>
+                <a href="https://portfolio-api-node.herokuapp.com/api/Auth/facebook"><i className="fa fa-facebook" aria-hidden="true"></i>{null}</a>
               </div>
               <div className="google commonBtn">
                 <a href="https://portfolio-api-node.herokuapp.com/api/Auth/google"><i className="fa fa-google-plus" aria-hidden="true"></i>{null}</a>
