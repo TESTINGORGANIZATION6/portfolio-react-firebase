@@ -16,11 +16,13 @@ import {
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import FootballLoader from '../../Common/FootballLoader'
 
 class RegistrationSteps extends PureComponent {
   constructor (props) {
     super(props)
     this.state = {
+      isLoader: false,
       currentStep: 1,
       isLoading: true,
       isUserRegisterd: false,
@@ -40,7 +42,7 @@ class RegistrationSteps extends PureComponent {
         Height: '',
         Weight: '',
         file: '',
-        imagePreviewUrl: '',
+        Photo: '',
         // Step 2
         Position: 'defaultPlayer',
         Role: 'default0',
@@ -122,7 +124,7 @@ class RegistrationSteps extends PureComponent {
     reader.onloadend = () => {
       const userResponse = { ...this.state.userResponse }
       userResponse.file = file
-      userResponse.imagePreviewUrl = reader.result
+      userResponse.Photo = reader.result
       this.setState({
         userResponse
       })
@@ -131,10 +133,12 @@ class RegistrationSteps extends PureComponent {
   }
 
   componentDidMount () {
+    console.log('hello')
     let userLog = sessionStorage.getItem('userData')
     userLog = JSON.parse(userLog)
 
     if (userLog) {
+      this.setState({ isLoader: true })
       getUserSession(userLog).then((res) => {
         if (res) {
           getRegistrationDetails(userLog).then((res) => {
@@ -150,7 +154,8 @@ class RegistrationSteps extends PureComponent {
               }
               this.setState({
                 userResponse: res,
-                isUserRegisterd: true
+                isUserRegisterd: true,
+                isLoader: false
               })
             } else {
               const userResponse = { ...this.state.userResponse }
@@ -158,15 +163,18 @@ class RegistrationSteps extends PureComponent {
               userResponse.LastName = userLog.LastName
               userResponse.Email = userLog.Email
               this.setState({
-                userResponse
+                userResponse,
+                isLoader: false
               })
             }
           })
         } else {
+          sessionStorage.clear()
           this.props.history.push('/login')
         }
       })
     } else {
+      sessionStorage.clear()
       this.props.history.push('/login')
     }
 
@@ -466,6 +474,14 @@ class RegistrationSteps extends PureComponent {
 
     return (
       <div className="registration_Wrapper">
+        {this.state.isLoader ? (
+          <div className="loader-resto">
+            <div className="loader">
+              <FootballLoader />
+              {/* <Loader type="Bars" color="#00BFFF" height={40} width={40} /> */}
+            </div>
+          </div>
+        ) : null}
         <div className="Multistep--stepsBar">
           <div className="container">
             <ul className="Multistep--stepsBarUl">

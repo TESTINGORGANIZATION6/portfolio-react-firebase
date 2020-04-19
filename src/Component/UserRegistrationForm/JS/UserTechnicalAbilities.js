@@ -73,12 +73,14 @@ function UserTechnicalAbilities ({
               </div>
             </div>
           </div>
-          <Button className="NEXT-btn" onClick={handleBack}>
-            Back
-          </Button>
-          <Button className="NEXT-btn" onClick={handleContinue}>
-            Save And Continue
-          </Button>
+          <div className="basicSubmitDetails">
+            <Button className="NEXT-btn" onClick={handleBack}>
+              Back
+            </Button>
+            <Button className="NEXT-btn" onClick={handleContinue}>
+              Save & Continue
+            </Button>
+          </div>
         </div>
       </div>
     </>

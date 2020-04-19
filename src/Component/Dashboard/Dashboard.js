@@ -17,10 +17,12 @@ class Dashboard extends PureComponent {
         if (res) {
           console.log('Valid Session')
         } else {
+          sessionStorage.clear()
           this.props.history.push('/login')
         }
       })
     } else {
+      sessionStorage.clear()
       this.props.history.push('/login')
     }
   }

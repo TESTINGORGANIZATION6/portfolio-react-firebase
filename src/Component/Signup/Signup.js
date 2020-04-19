@@ -8,7 +8,7 @@ import { testAction, getSignupUserId } from '../../Store/Actions'
 import Login from '../Login/Login'
 import { register, checkUserName } from '../../Services/services'
 import PropTypes from 'prop-types'
-import Loader from 'react-loader-spinner'
+import FootballLoader from '../Common/FootballLoader'
 import './Signup.scss'
 import '../Login/Login.scss'
 
@@ -119,7 +119,8 @@ class Signup extends PureComponent {
     updatedInputValues[3].isError = !email_reg.test(updatedInputValues[3].value)
     updatedInputValues[4].isError = !event.target[4].value.length
 
-    updatedInputValues[5].isError = (updatedInputValues[4].value !== updatedInputValues[5].value)
+    updatedInputValues[5].isError =
+      updatedInputValues[4].value !== updatedInputValues[5].value
 
     if (!updatedInputValues.filter((input) => input.isError === true).length) {
       const userDetail = {
@@ -163,14 +164,21 @@ class Signup extends PureComponent {
   }
 
   checkSignup () {
-    const { isSignUp, inputValues, isUserFieldCheck, isUserNameValid } = this.state
+    const {
+      isSignUp,
+      inputValues,
+      isUserFieldCheck,
+      isUserNameValid
+    } = this.state
     toastr.options = { positionClass: 'toast-top-center' }
     return (
       isSignUp && (
         <div id="myModal" className="signup-modal">
           <div className="modal-content">
             {/* <span className="close" onClick={this.updateOnCloseClick}>&times;</span> */}
-            <div style={{ fontSize: '22px', fontFamily: 'robotobold' }}>Create a New Account</div>
+            <div style={{ fontSize: '22px', fontFamily: 'robotobold' }}>
+              Create a New Account
+            </div>
             <div>
               <img
                 src={require('../../Images/signup.png')}
@@ -212,7 +220,18 @@ class Signup extends PureComponent {
                   onChange={(e) => this.onChange(e)}
                   onBlur={(e) => this.onBlur(e)}
                 />
-                <span>{isUserFieldCheck && <i className={isUserNameValid ? 'fa fa-check green check-icon' : 'fa fa-times red check-icon'} aria-hidden="true"></i>}</span>
+                <span>
+                  {isUserFieldCheck && (
+                    <i
+                      className={
+                        isUserNameValid
+                          ? 'fa fa-check green check-icon'
+                          : 'fa fa-times red check-icon'
+                      }
+                      aria-hidden="true"
+                    ></i>
+                  )}
+                </span>
               </div>
               <div className="error-message">
                 {inputValues[2].isError && inputValues[2].error}
@@ -255,7 +274,9 @@ class Signup extends PureComponent {
               <div className="error-message">
                 {inputValues[5].isError && inputValues[5].error}
               </div>
-              <button className="signup-box-button" disabled={!isUserNameValid}>Sign Up</button>
+              <button className="signup-box-button" disabled={!isUserNameValid}>
+                Sign Up
+              </button>
             </form>
             <div
               style={{
@@ -264,7 +285,10 @@ class Signup extends PureComponent {
                 marginBottom: '3px'
               }}
             ></div>
-            <div className="signup-box-footer" style={{ fontSize: '22px', fontFamily: 'robotomedium' }}>
+            <div
+              className="signup-box-footer"
+              style={{ fontSize: '22px', fontFamily: 'robotomedium' }}
+            >
               <span style={{ margin: '10px 0px', fontSize: '18px' }}>
                 Have an account ?{' '}
               </span>
@@ -291,7 +315,7 @@ class Signup extends PureComponent {
       isLoader && (
         <div className="loader-resto">
           <div className="loader">
-            <Loader type="Bars" color="#00BFFF" height={40} width={40} />
+            <FootballLoader />
           </div>
         </div>
       )
