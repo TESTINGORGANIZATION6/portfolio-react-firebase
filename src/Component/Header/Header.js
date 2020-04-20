@@ -18,7 +18,7 @@ class Header extends PureComponent {
     }
   }
 
-  handleUserDropdown = (e) => {
+  handleUserDropdown = async (e) => {
     this.setState({
       showDropdown: !this.state.showDropdown
     })
