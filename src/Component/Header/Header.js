@@ -21,7 +21,7 @@ class Header extends PureComponent {
   handleUserDropdown = (e) => {
     this.setState(prevState => ({
       showDropdown: !prevState.showDropdown
-    }));
+    }))
   };
 
   handleSidebar = (e) => {
