@@ -7,7 +7,7 @@ import { testAction, getLoginDetailInfo } from '../../Store/Actions'
 import './Login.scss'
 import { login } from '../../Services/services'
 import PropTypes from 'prop-types'
-import Loader from 'react-loader-spinner'
+import FootballLoader from '../Common/FootballLoader'
 
 class Login extends PureComponent {
   constructor (props) {
@@ -71,7 +71,7 @@ class Login extends PureComponent {
             this.props.history.push('/dashBoard')
           })
         } else {
-          toastr.success('incorrect login id and password')
+          toastr.error('incorrect login id and password')
           this.setState({ isLoader: false }, () => {
             this.props.history.push('/login')
           })
@@ -92,14 +92,16 @@ class Login extends PureComponent {
         {isLoader ? (
           <div className="loader-resto">
             <div className="loader">
-              <Loader type="Bars" color="#00BFFF" height={40} width={40} />
+              <FootballLoader />
             </div>
           </div>
         ) : null}
         <div id="myModal" className="login-modal">
           <div className="modal-content">
             {/* <span className="close" onClick={this.updateOnCloseClick}>&times;</span> */}
-            <div style={{ fontSize: '22px', fontFamily: 'robotobold' }}>Log In</div>
+            <div style={{ fontSize: '22px', fontFamily: 'robotobold' }}>
+              Log In
+            </div>
             <div>
               <img
                 src={require('../../Images/login.png')}
@@ -142,7 +144,10 @@ class Login extends PureComponent {
                 // marginBottom: '20px'
               }}
             ></div>
-            <div className="login-box-footer" style={{ fontSize: '22px', fontFamily: 'robotomedium' }}>
+            <div
+              className="login-box-footer"
+              style={{ fontSize: '22px', fontFamily: 'robotomedium' }}
+            >
               <span style={{ margin: '10px 0px', fontSize: '18px' }}>
                 Dont have an account ?{' '}
               </span>
@@ -160,16 +165,28 @@ class Login extends PureComponent {
             {/* <a href="https://portfolio-api-node.herokuapp.com/api/Auth/google">Click here</a> */}
             <div className="social-icons-button">
               <div className="facebook commonBtn">
-                <a href="https://portfolio-api-node.herokuapp.com/api/Auth/facebook"><i className="fa fa-facebook" aria-hidden="true"></i>{null}</a>
+                <a href="https://portfolio-api-node.herokuapp.com/api/Auth/facebook">
+                  <i className="fa fa-facebook" aria-hidden="true"></i>
+                  {null}
+                </a>
               </div>
               <div className="google commonBtn">
-                <a href="https://portfolio-api-node.herokuapp.com/api/Auth/google"><i className="fa fa-google-plus" aria-hidden="true"></i>{null}</a>
+                <a href="https://portfolio-api-node.herokuapp.com/api/Auth/google">
+                  <i className="fa fa-google-plus" aria-hidden="true"></i>
+                  {null}
+                </a>
               </div>
               <div className="instagram commonBtn">
-                <a href="https://portfolio-api-node.herokuapp.com/api/Auth/google"><i className="fa fa-instagram" aria-hidden="true"></i>{null}</a>
+                <a href="https://portfolio-api-node.herokuapp.com/api/Auth/google">
+                  <i className="fa fa-instagram" aria-hidden="true"></i>
+                  {null}
+                </a>
               </div>
               <div className="twitter commonBtn">
-                <a href="https://portfolio-api-node.herokuapp.com/api/Auth/google"><i className="fa fa-twitter" aria-hidden="true"></i>{null}</a>
+                <a href="https://portfolio-api-node.herokuapp.com/api/Auth/google">
+                  <i className="fa fa-twitter" aria-hidden="true"></i>
+                  {null}
+                </a>
               </div>
             </div>
           </div>

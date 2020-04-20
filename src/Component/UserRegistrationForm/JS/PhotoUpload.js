@@ -9,14 +9,12 @@ class CardProfile extends PureComponent {
   }
 
   render () {
-    // const FilePath = this.props.values.userResponse
-    // console.log(FilePath.file)
     const { Photo } = this.props.values.userResponse
-    let $imagePreview = null
+    let $Photo = null
     if (Photo) {
-      $imagePreview = <img src={Photo} alt="" />
+      $Photo = <img src={Photo} alt="" />
     } else {
-      $imagePreview = (
+      $Photo = (
         <div className="previewText">
           <i className="fa fa-upload" aria-hidden="true"></i>
         </div>
@@ -38,18 +36,16 @@ class CardProfile extends PureComponent {
             </div>
             <label htmlFor="imageUpload">
               <div className="avatar-preview">
-                <div className="imgPreview" id="imagePreview">
-                  {$imagePreview}
+                <div className="imgPreview" id="Photo">
+                  {$Photo}
                 </div>
               </div>
             </label>
           </div>
           <div>
-            {Photo !== '' ? (
+            {Photo ? (
               <label className="imageUploadStatusSuccess">
-                Image{' '}
-                {/* {FilePath.name} */}
-                  Uploaded Successfully.
+                Image Uploaded Successfully.
               </label>
             ) : (
               <label className="imageUploadStatus">

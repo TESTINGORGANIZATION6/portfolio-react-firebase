@@ -57,6 +57,22 @@ function UserBasicDetails ({
             <div className="player_information_box">
               <div className="row">
                 <div className="col-md-5">
+                  <div
+                    className="registration_fields"
+                    style={{ paddingBottom: '0' }}
+                  >
+                    <label>Upload a Photo*</label>
+
+                    <CardProfile
+                      handleImageChange={handleImageChange}
+                      values={values}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="col-md-5">
                   <div className="registration_fields">
                     <label>First Name*</label>
                     <input
@@ -138,35 +154,6 @@ function UserBasicDetails ({
               <div className="row">
                 <div className="col-md-5">
                   <div className="registration_fields">
-                    <label>Nationality*</label>
-                    <div className="customDropDownArrow">
-                      <span>
-                        <i className="right"></i>
-                      </span>
-                      <select
-                        onChange={handleChange('Nationality')}
-                        onBlur={handleBlurEvent('Nationality')}
-                        value={finalValues.Nationality}
-                        className="browser-default custom-select"
-                      >
-                        <option defaultValue value="default">
-                          Select Nationality
-                        </option>
-                        <option value="india">India</option>
-                        <option value="brazil">Brazil</option>
-                      </select>
-
-                      {errors.Nationality ? (
-                        <p className="inputError">{errors.Nationality}</p>
-                      ) : null}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="row">
-                <div className="col-md-5">
-                  <div className="registration_fields">
                     <label>Height in C.M*</label>
                     <input
                       className="u-full-width"
@@ -205,25 +192,41 @@ function UserBasicDetails ({
               </div>
 
               <div className="row">
-                <div className="col-md-12">
-                  <div
-                    className="registration_fields"
-                    style={{ paddingBottom: '0' }}
-                  >
-                    <label>Upload a Photo*</label>
+                <div className="col-md-5">
+                  <div className="registration_fields">
+                    <label>Nationality*</label>
+                    <div className="customDropDownArrow">
+                      <span>
+                        <i className="right"></i>
+                      </span>
+                      <select
+                        onChange={handleChange('Nationality')}
+                        onBlur={handleBlurEvent('Nationality')}
+                        value={finalValues.Nationality}
+                        className="browser-default custom-select"
+                      >
+                        <option defaultValue value="default">
+                          Select Nationality
+                        </option>
+                        <option value="india">India</option>
+                        <option value="brazil">Brazil</option>
+                      </select>
 
-                    <CardProfile
-                      handleImageChange={handleImageChange}
-                      values={values}
-                    />
+                      {errors.Nationality ? (
+                        <p className="inputError">{errors.Nationality}</p>
+                      ) : null}
+                    </div>
                   </div>
                 </div>
+                <div className="col-md-1"></div>
               </div>
             </div>
           </div>
-          <Button className="NEXT-btn" onClick={handleContinue}>
-            Save And Continue
-          </Button>
+          <div className="basicSubmitDetails">
+            <Button className="NEXT-btn" onClick={handleContinue}>
+              Save & Continue
+            </Button>
+          </div>
         </div>
       </div>
     </>

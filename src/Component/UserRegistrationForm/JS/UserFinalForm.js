@@ -22,10 +22,9 @@ function UserFinalForm ({ values, userLog, nextStep, prevStep }) {
     ).techAbilities
   }
   const finalValues = values.userResponse
-  console.log(finalValues)
   return (
     <>
-      <div className="player_information_form">
+      <div className="player_information_form player_information_form_review">
         <div className="container">
           <div className="player_basic_information">
             <div className="verticle_line">
@@ -38,13 +37,9 @@ function UserFinalForm ({ values, userLog, nextStep, prevStep }) {
 
             <div className="player_information_box">
               <>
-                <h1 className="FinalReviewHeader FinalReviewHeaderPT">
-                  Basic Information
-                </h1>
-                <div className="row FinalReviewHeaderRow">
+                <div className="row">
                   <div className="col-md-12">
-                    <div className="reviewData">
-                      <p className="reviewData--header">Profile Photo</p>
+                    <div className="reviewData reviewProfileData ">
                       {finalValues.Photo === '' ? (
                         <img
                           className="ImagePreview"
@@ -60,6 +55,11 @@ function UserFinalForm ({ values, userLog, nextStep, prevStep }) {
                       )}
                     </div>
                   </div>
+                </div>
+                <h1 className="FinalReviewHeader FinalReviewHeaderPT">
+                  Basic Information
+                </h1>
+                <div className="row FinalReviewHeaderRow">
                   <div className="col-md-4">
                     <div className="reviewData">
                       <p className="reviewData--header">Firstname</p>
@@ -280,7 +280,11 @@ function UserFinalForm ({ values, userLog, nextStep, prevStep }) {
                         Alternate Mobile Number
                       </p>
                       <p className="reviewData--value">
-                        {finalValues.AlternateMobileNumber}
+                        {finalValues.AlternateMobileNumber === '' ? (
+                          '-'
+                        ) : (
+                          <span>{finalValues.AlternateMobileNumber}</span>
+                        )}
                       </p>
                     </div>
                   </div>

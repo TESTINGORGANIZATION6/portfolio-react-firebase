@@ -114,6 +114,7 @@ function UserContactDetails ({
                       onBlur={handleBlurEvent('Email')}
                       defaultValue={values.userResponse.Email}
                       required
+                      style={{ textTransform: 'lowercase' }}
                     />
                     {errors.Email ? (
                       <p className="inputError">{errors.Email}</p>
@@ -151,12 +152,14 @@ function UserContactDetails ({
               </div>
             </div>
           </div>
-          <Button className="NEXT-btn" onClick={handleBack}>
-            Back
-          </Button>
-          <Button className="NEXT-btn" onClick={handleContinue}>
-            Save And Continue
-          </Button>
+          <div className="basicSubmitDetails">
+            <Button className="NEXT-btn" onClick={handleBack}>
+              Back
+            </Button>
+            <Button className="NEXT-btn" onClick={handleContinue}>
+              Save & Continue
+            </Button>
+          </div>
         </div>
       </div>
     </>

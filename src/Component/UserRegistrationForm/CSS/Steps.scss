@@ -9,7 +9,7 @@
 .player_basic_information {box-shadow: 0 6px 3px -9px rgba(0, 0, 0, 0.16), 0 1px 3px 0px rgba(0, 0, 0, 0.23);background: #fff;}
 .registration_fields{display: flex;flex-direction: column;padding: 10px 0 25px;}
 .registration_fields label{margin: 0;font-size: 14px;color: #e44545;padding-bottom: 5px;text-align: left;font-family: 'robotomedium';}
-.registration_fields .u-full-width{border: none;border-bottom: 1px solid #ccc;width: 100%;margin-bottom: 5px;font-size: 14px;}
+.registration_fields .u-full-width{border: none;border-bottom: 1px solid #ccc;width: 100%;margin-bottom: 5px;font-size: 14px;text-transform: capitalize;}
 .registration_fields .u-full-width:focus{box-shadow: none;outline: none;transition: transform .5s ease;}
 
 /* Css for Steps Butons Starts here */
@@ -101,9 +101,9 @@ h1.FinalReviewHeader::after{content:"";position:absolute;width:200px;height:2px;
 .PrevClubData .reviewData {padding: 2px 0;}
 .FinalReviewHeaderClubRow{ padding-bottom: 20px;}
 .noteBox{font-size: 12px;color: red;font-weight: 600;padding-left: 15px;}
-.inputError {position: absolute;bottom: -15px;color: #fff;background: #d64242;font-size: 10px;border-radius: 5px;padding: 3px 9px;transition: .3s all;}
+.inputError {position: absolute;bottom: 0px;color: #fff;background: #d64242;font-size: 10px;border-radius: 5px;padding: 3px 9px;transition: .3s all;}
 .browser-default.custom-select{height: auto !important;}
-.customDropDownArrow .inputError{bottom: -45px;transition: .3s all;}
+.customDropDownArrow .inputError{bottom: -30px;transition: .3s all;}
 .registration_fields textarea{font-size: 14px;}
 .registration_fields_error{padding: 10px 0 25px;}
 .registration_fields_error label{margin-bottom: 15px;}
@@ -114,7 +114,7 @@ h1.FinalReviewHeader::after{content:"";position:absolute;width:200px;height:2px;
 .reviewData .slider{margin: 20px 0;}
 .mandatoryText{color: #e44545;font-size: 12px;text-align: right;padding: 10px 0;font-family: 'robotomedium';}
 .rangeslider-horizontal .rangeslider__handle{background: url('../../../Images/soccer.svg');width: 100px;height: 100px;}
-.registration_Wrapper{background: #f2f3f8;padding-top: 5rem;}
+.registration_Wrapper{background: #f2f3f8;padding-top: 5rem;min-height: 100vh;}
 .registration_fieldsDatePicker .react-datepicker__current-month,.registration_fieldsDatePicker .react-datepicker-time__header, .registration_fieldsDatePicker .react-datepicker-year-header{display: none;}
 .registration_fieldsDatePicker .react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle::before , .registration_fieldsDatePicker .react-datepicker-popper[data-placement^="top"] .react-datepicker__triangle , .registration_fieldsDatePicker  .react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle{border: none;}
 .registration_fieldsDatePicker .react-datepicker__header{background-color: #ffffff;border-bottom: none;}
@@ -124,8 +124,8 @@ h1.FinalReviewHeader::after{content:"";position:absolute;width:200px;height:2px;
 
 /* CSS FOR CUSTOM TOAST NOTIFICATION STARTS HERE  */
 .toast-success {background-color: #51A351 !important;}
-// .toast-warning{background: #FFCF06 !important;}
-.toast-error{background: red !important}
+.toast-warning{background-color: #FFCF06 !important;}
+.toast-error{background-color: red !important}
 /* CSS FOR CUSTOM TOAST NOTIFICATION ENDS HERE  */
 
 .loader-resto {position: fixed;height: 100%;width: 100%;left: 50%;top: 50%;transform: translate(-50%, -50%);transition: opacity 0.3s ease-out 0s, visibility 0.3s ease-out 0s;background-color: rgba(0, 0, 0, 0.3);z-index: 9999;}
@@ -144,6 +144,8 @@ h1.FinalReviewHeader::after{content:"";position:absolute;width:200px;height:2px;
   -moz-appearance: textfield;
 }
 
+.player_information_form_review{padding-top: 5rem;}
+
 .ImagePreview{width: 100px;border: 1px solid;height: 100px;}
 
 @media only screen and (max-width:767px) {
@@ -151,7 +153,11 @@ h1.FinalReviewHeader::after{content:"";position:absolute;width:200px;height:2px;
     .player_information_box .col-md-5{width: 50%;}
 }
 
+@media only screen and (max-width:575px) {
+  .basicSubmitDetails{display: flex;justify-content: center;}
+  .player_information_form .NEXT-btn{max-width: 200px;width: 100%;font-size: 14px;height: 35px;margin-right: 5px;}
+}
+
 @media only screen and (max-width:480px) {
     .player_information_box .col-md-5{width: 100%;}
 }
-
