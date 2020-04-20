@@ -57,22 +57,6 @@ function UserBasicDetails ({
             <div className="player_information_box">
               <div className="row">
                 <div className="col-md-5">
-                  <div
-                    className="registration_fields"
-                    style={{ paddingBottom: '0' }}
-                  >
-                    <label>Upload a Photo*</label>
-
-                    <CardProfile
-                      handleImageChange={handleImageChange}
-                      values={values}
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="row">
-                <div className="col-md-5">
                   <div className="registration_fields">
                     <label>First Name*</label>
                     <input
@@ -218,7 +202,21 @@ function UserBasicDetails ({
                     </div>
                   </div>
                 </div>
+
                 <div className="col-md-1"></div>
+                <div className="col-md-5">
+                  <div
+                    className="registration_fields"
+                    style={{ paddingBottom: '0' }}
+                  >
+                    <label>Upload a Photo*</label>
+
+                    <CardProfile
+                      handleImageChange={handleImageChange}
+                      values={values}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>

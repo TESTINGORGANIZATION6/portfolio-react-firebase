@@ -1,4 +1,6 @@
 import axios from './index'
+import toastr from 'toastr'
+import 'toastr/build/toastr.min.css'
 
 export const getRegistrationDetails = (userLog) => {
   const config = {
@@ -111,5 +113,7 @@ export const getUserSession = (userLog) => {
     })
     .catch((err) => {
       console.log(err)
+      toastr.error('Session Expired !!!')
+      localStorage.clear()
     })
 }

@@ -15,7 +15,7 @@ class Dashboard extends PureComponent {
     if (userLog) {
       getUserSession(userLog).then((res) => {
         if (res) {
-          console.log('Valid Session')
+          return true
         } else {
           sessionStorage.clear()
           this.props.history.push('/login')

@@ -7,7 +7,6 @@ import PropTypes from 'prop-types'
 function UserFinalForm ({ values, userLog, nextStep, prevStep }) {
   const handleContinue = (evt) => {
     evt.preventDefault()
-    console.log(userLog)
     userLog.history.push('/dashboard')
   }
 

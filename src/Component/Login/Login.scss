@@ -149,3 +149,12 @@
         }
     }
 }
+
+@media only screen and (max-width: 480px) {
+    .login-modal {
+        .modal-content{
+            max-width: 300px;
+            width: 100%;
+        }
+    }
+}

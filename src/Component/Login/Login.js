@@ -37,7 +37,7 @@ class Login extends PureComponent {
   }
 
   onChange () {
-    console.log('input change')
+    return true
   }
 
   onSubmitClick = (event) => {
@@ -54,7 +54,7 @@ class Login extends PureComponent {
     updatedInputValues[0].isError = !event.target[0].value.length
     updatedInputValues[1].isError = !event.target[1].value.length
 
-    console.log('<------->', updatedInputValues)
+    // console.log('<------->', updatedInputValues)
 
     if (!updatedInputValues.filter((input) => input.isError === true).length) {
       const userDetail = {
@@ -63,12 +63,12 @@ class Login extends PureComponent {
       }
       this.setState({ isLoader: true })
       login(userDetail).then((res) => {
-        console.log('login ---> data -> ', res)
+        // console.log('login ---> data -> ', res)
         if (res.success) {
           this.props.getLoginDetailInfo(res)
           toastr.success('Login done successfully')
           this.setState({ isLoader: false }, () => {
-            this.props.history.push('/dashBoard')
+            this.props.history.push('/dashboard')
           })
         } else {
           toastr.error('incorrect login id and password')
