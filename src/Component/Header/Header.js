@@ -18,10 +18,10 @@ class Header extends PureComponent {
     }
   }
 
-  handleUserDropdown = async (e) => {
-    this.setState({
-      showDropdown: !this.state.showDropdown
-    })
+  handleUserDropdown = (e) => {
+    this.setState(prevState => ({
+      showDropdown: !prevState.showDropdown
+    }));
   };
 
   handleSidebar = (e) => {

@@ -167,10 +167,12 @@ class RegistrationSteps extends PureComponent {
             }
           })
         } else {
+          sessionStorage.clear()
           this.props.history.push('/login')
         }
       })
     } else {
+      sessionStorage.clear()
       this.props.history.push('/login')
     }
 
