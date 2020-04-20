@@ -16,7 +16,6 @@ function UserContactDetails ({
     e.preventDefault()
     const error = UserContactValidation({ values })
     setErrors(error.errors)
-    console.log(error)
 
     if (error.count <= 0) {
       const userDetails = values.userResponse
@@ -24,11 +23,11 @@ function UserContactDetails ({
       userLog = JSON.parse(userLog)
       if (values.isUserRegisterd) {
         userUpdate(userDetails, userLog).then((res) => {
-          console.log(res)
+          return true
         })
       } else {
         userRegister(userDetails, userLog).then((res) => {
-          console.log(res)
+          return true
         })
       }
       nextStep(6)

@@ -6,7 +6,7 @@
     background-size: cover;
     text-align: center;
     position: fixed;
-    z-index: 1;
+    z-index: 2;
     left: 0;
     top: 0;
     width: 100%;
@@ -139,6 +139,31 @@
                 border: 1px solid #9898ff;
                 background-color: #9898ff;
                 cursor: default;
+            }
+        }
+    }
+}
+
+
+@media only screen and (max-width: 575px) {
+    .signup-modal {
+        z-index: 2;
+        .modal-content{
+            padding: 10px 20px;
+        }
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .signup-modal {
+        .modal-content{
+            max-width: 300px;
+            width: 100%;
+            .signup-box{
+                .error-message{
+                    margin-bottom: 5px;
+                    font-size: 12px;
+                }
             }
         }
     }

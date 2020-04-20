@@ -117,7 +117,6 @@ class RegistrationSteps extends PureComponent {
   }
 
   handleImageChange = (e) => {
-    console.log('Image Change')
     const reader = new FileReader()
     const file = e.target.files[0]
 
@@ -133,7 +132,6 @@ class RegistrationSteps extends PureComponent {
   }
 
   componentDidMount () {
-    console.log('hello')
     let userLog = sessionStorage.getItem('userData')
     userLog = JSON.parse(userLog)
 
@@ -169,12 +167,10 @@ class RegistrationSteps extends PureComponent {
             }
           })
         } else {
-          sessionStorage.clear()
           this.props.history.push('/login')
         }
       })
     } else {
-      sessionStorage.clear()
       this.props.history.push('/login')
     }
 

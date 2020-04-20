@@ -13,12 +13,19 @@ class Header extends PureComponent {
     this.state = {
       sidebar: false,
       isLogin: false,
-      userLog: null
+      userLog: null,
+      showDropdown: false
     }
   }
 
+  handleUserDropdown = (e) => {
+    this.setState({
+      showDropdown: !this.state.showDropdown
+    })
+  };
+
   handleSidebar = (e) => {
-    this.setState(prevstate => ({ sidebar: !prevstate.sidebar }))
+    this.setState((prevstate) => ({ sidebar: !prevstate.sidebar }))
   };
 
   handleOverlay = (e) => {
@@ -68,14 +75,16 @@ class Header extends PureComponent {
     let { isLogin } = this.state.isLogin
     const userDetails = JSON.parse(sessionStorage.getItem('userData'))
     if (userDetails) {
-      isLogin = true
+      if (userDetails.success) {
+        isLogin = true
+      }
     }
     return (
       <>
         <div className="headerFixed">
           <nav className="navbar navbar-expand-sm navbar-dark">
             <Link to="/" className="navbar-brand">
-              HOME
+              HEXOVO
             </Link>
             <button
               className={
@@ -105,27 +114,105 @@ class Header extends PureComponent {
               <ul className="HeaderUl">
                 <li className="HeaderList">
                   <div className="UserName">
-                    <i
-                      className="fa fa-user-circle userProfile"
-                      aria-hidden="true"
-                    ></i>
                     {isLogin ? (
-                      <>{`${userDetails.FirstName} ${userDetails.LastName}`}</>
+                      <div
+                        className="loginUserBox"
+                        onClick={this.handleUserDropdown}
+                      >
+                        <span className={this.state.showDropdown ? 'arrowUp' : 'arrowDown'}><i className="fa fa-caret-right"></i></span>
+
+                        {`${userDetails.FirstName.charAt(
+                          0
+                        )}${userDetails.LastName.charAt(0)}`}
+                        {this.state.showDropdown ? (
+                          <div className="headerDropdown">
+                            <p>Hello, </p>
+                            <p className="headerDropdown--user">{`${userDetails.FirstName} ${userDetails.LastName}`}</p>
+                            <p className="headerDropdown--logs headerDropdown--profile">
+                              <Link
+                                to="/"
+                                className="headerDropdown--links"
+                              >
+                                Home
+                              </Link>
+                            </p>
+                            <p className="headerDropdown--logs">
+                              <Link
+                                to="/dashboard"
+                                className="headerDropdown--links"
+                              >
+                              Your Profile
+                              </Link>
+                            </p>
+                            <p className="headerDropdown--logs">
+                              <Link
+                                to="/dashboard"
+                                className="headerDropdown--links"
+                              >
+                                Go to Dashboard
+                              </Link>
+                            </p>
+                            <p
+                              className="headerDropdown--logs"
+                              onClick={this.updateLogout}
+                            >
+                              Logout
+                            </p>
+                          </div>
+                        ) : null}
+                      </div>
                     ) : (
-                      <Link to="/login" onClick={this.handleOverlay}>Signup / Login</Link>
+                      <Link to="/login" onClick={this.handleOverlay}>
+                        Signup / Login
+                      </Link>
                     )}
                   </div>
                 </li>
+              </ul>
+            </div>
 
+            <div
+              className={
+                'HeaderSideBar HeaderSideBarUpdated' +
+                ' ' +
+                (this.state.sidebar ? 'HeaderSideBarUpdated HeaderSideBarRight' : '')
+              }
+            >
+              <ul className="HeaderUl">
                 {isLogin ? (
-                  <li className="HeaderList HeaderListLogout HeaderLoginList">
-                    <p>
-                      <span className="logoutBtn" onClick={this.updateLogout}>
-                        <i className="fa fa-sign-out" aria-hidden="true"></i>Logout
-                      </span>
-                    </p>
-                  </li>
-                ) : null}
+                  <>
+                    <li className="HeaderList">
+                      <div className="HeaderList--userInfo">
+                        <i
+                          className="fa fa-user-circle userProfile"
+                          aria-hidden="true" style={{ paddingRight: '10px', fontSize: '30px' }}
+                        ></i>
+                        <p>Hello,</p>
+                        <p className="">&nbsp; {`${userDetails.FirstName}`}</p>
+                      </div>
+                    </li>
+                    <li className="HeaderList">
+                      <Link to="/" onClick={this.handleOverlay}>Home</Link>
+                    </li>
+                    <li className="HeaderList">
+                      <Link to="/dashboard" onClick={this.handleOverlay}>Your Profile</Link>
+                    </li>
+                    <li className="HeaderList">
+                      <Link to="/dashboard" onClick={this.handleOverlay}>Go to Dashboard</Link>
+                    </li>
+                    <li className="HeaderList" onClick={this.updateLogout}>
+                      Logout
+                    </li>
+                  </>
+                ) : (
+                  <Link to="/login" onClick={this.handleOverlay} style={{ display: 'flex', alignItems: 'center' }}>
+                    <i
+                      className="fa fa-user-circle userProfile"
+                      aria-hidden="true" style={{ paddingRight: '10px', fontSize: '20px' }}
+                    ></i>
+                    Signup / Login
+                  </Link>
+                )}
               </ul>
             </div>
           </nav>
