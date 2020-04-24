@@ -7,8 +7,6 @@ import UserContactDetails from './UserContactDetails'
 import UserFinalForm from './UserFinalForm'
 import '../CSS/Steps.scss'
 import { AddClubValidation } from './Validation'
-import toastr from 'toastr'
-import 'toastr/build/toastr.min.css'
 import {
   getRegistrationDetails,
   getUserSession
@@ -168,12 +166,12 @@ class RegistrationSteps extends PureComponent {
           })
         } else {
           sessionStorage.clear()
-          this.props.history.push('/login')
+          this.props.history.push('/')
         }
       })
     } else {
       sessionStorage.clear()
-      this.props.history.push('/login')
+      this.props.history.push('/')
     }
 
     this.setState({
@@ -394,8 +392,6 @@ class RegistrationSteps extends PureComponent {
   render () {
     const { currentStep } = this.state
     const values = { ...this.state }
-
-    toastr.options = { positionClass: 'toast-top-center' }
 
     var data = ''
     switch (currentStep) {
