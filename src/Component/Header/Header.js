@@ -23,7 +23,7 @@ class Header extends PureComponent {
   }
 
   componentDidUpdate (prevProps, prevState) {
-    const userDetails = JSON.parse(sessionStorage.getItem('userData'))
+    const userDetails = JSON.parse(localStorage.getItem('userData'))
     if (userDetails) {
       console.log('in session')
     } else {
@@ -51,17 +51,16 @@ class Header extends PureComponent {
 
   updateLogout = () => {
     this.setState({
-      sidebar: false
+      sidebar: false, isUser: false
     })
-    this.setState({ isUser: false })
     this.props.sayHeader(false)
-    sessionStorage.clear()
+    localStorage.clear()
     this.props.history.push('/')
     toastr.success('You Have Logged Out Successfully !!')
   };
 
   componentDidMount () {
-    const userDetails = JSON.parse(sessionStorage.getItem('userData'))
+    const userDetails = JSON.parse(localStorage.getItem('userData'))
     this.setState({
       userDetails
     })
